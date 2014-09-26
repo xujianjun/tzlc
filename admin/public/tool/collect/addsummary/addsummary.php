@@ -1,4 +1,7 @@
 <?php
+
+//b,br,strong,font,mdash(-|,),quot(”),middot(.),helli,rsquo,Oslash,编者,编辑,div,img,本报讯
+
 header("Content-type: text/html; charset=utf-8");
 set_time_limit(0);
 error_reporting(E_ALL);
@@ -17,8 +20,8 @@ $rows = array();
 //$sql:select td.* from tree_data td inner join tree_struct ts on td.id=ts.id where ts.type="article" and td.summary is NULL order by td.id
 $sql = 'select td.* from tree_data td ' .
 		'inner join tree_struct ts on td.id=ts.id ' .
-		'where ts.type="article" and td.summary is NULL ' .
-		'order by td.id limit 2000';
+		'where ts.type="article" and ts.id not in (4390,5017,5018,4935,4936) and td.summary is NULL ' .
+		'order by td.id limit 100';
 $result = mysql_query($sql);
 
 $total = mysql_affected_rows();
@@ -28,17 +31,17 @@ while ($row = mysql_fetch_assoc($result)){
 	$content = $row['content'];
 	$summary = gelSummary($content);
 	$updateSql = 'update tree_data set summary="'.$summary.'" where id='.$row['id'];
-	echo $updateSql;
-	mysql_query($updateSql);
+	echo $updateSql.';<br>';
+//	mysql_query($updateSql);
 	$line = 'nid:'.$row['id'].', title:'.$row['title'].', summary:'.$summary;
 //	echo 'line:'.$line.'<hr>';
-	echo $index.'/'.$total.': '.$line.'<br>';
-	writeToTxt($line);
+//	echo $index.'/'.$total.': '.$line.'<br>';
+//	writeToTxt($line);
 	ob_flush();
 	flush();
 }
 
-function gelSummary($content, $length=300){
+function gelSummary($content, $length=200){
 	$filter = array ("'<script[^>]*?>.*?</script>'si",  // 去掉 javascript
 				 "'<img.*?>'i",
 				 "'<iframe.*?>.*?<\/iframe>'si",

@@ -44,6 +44,7 @@ try {
     echo $application->handle()->getContent();
 
 } catch (Exception $e) {
-	header("Location: /notfound/",TRUE,301);
+//	header("Location: /notfound/",TRUE,301);
+	echo 'Sorry, an error has ocurred :('.$e->getMessage().')';
 	exit();
 }

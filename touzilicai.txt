@@ -7,7 +7,7 @@ slider改用boots的							done（无数据）
 学堂首页从2楼开始分左右2大栏					done,右侧无数据
 后台添加选择图片功能						cancel
 tag数据的修复								done， 170个没有tag的node article
-summary数据的修复							done, 2000+个无数据的
+summary数据的修复							done, 1000+个无数据的
 现货，保险产品评测数据						done
 csz使用后台总是乱码，但dzh用的时候就没问题
 panel右侧padding有问题，在非首页				done
@@ -22,7 +22,11 @@ tag页面的上一篇，下一篇						done
 二级菜单									done
 静态页面									doing
 sitemap									done
-404										done,页面要进一步处理
+404										done
+git版本库迁移								done,为了安全，老的touzilicai保留1周
+alpha环境的建立							done
+
+
 --------------------------------------
 网站颜色：
 #ff0066 深红，头部背景
@@ -43,6 +47,9 @@ sitemap									done
 --------------------------------------
 
 qq:2958262595,慧学网
+root !licai|map|root!
+licaimap/pma licaimap@2014
+
 
 echo '<pre>';print_r();echo '</pre>';
 

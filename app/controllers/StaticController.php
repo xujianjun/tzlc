@@ -16,6 +16,6 @@ class StaticController extends ControllerBase
     }
     public function notfoundAction(){
     	$this->view->disableLevel(View::LEVEL_LAYOUT);
-    	$this->_initPageData(array('notfound'));
+    	$this->_initPageData(array('notfound', 'panel--hot'));
     }
 }
