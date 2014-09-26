@@ -1,0 +1,74 @@
+
+
+slider改用boots的							done（无数据）
+学堂sidebar改改							done（无数据）
+增加一个widget，带图片的。放到首页右侧			done，适用财富生活，暂无数据
+首页从2楼开始分左右2大栏						done,右侧无数据
+学堂首页从2楼开始分左右2大栏					done,右侧无数据
+后台添加选择图片功能						cancel
+tag数据的修复								done， 170个没有tag的node article
+summary数据的修复							done, 2000+个无数据的
+现货，保险产品评测数据						done
+csz使用后台总是乱码，但dzh用的时候就没问题
+panel右侧padding有问题，在非首页				done
+热门标签（居中）
+有的没有链接								done
+首页菜单加上分割线							done
+meta title								done
+meta desc								done
+tag页面的上一篇，下一篇						done
+贵金属修复，现货，保险内容					done
+产品评测暂不发布内容						deleted
+二级菜单									done
+静态页面									doing
+sitemap									done
+404										done,页面要进一步处理
+--------------------------------------
+网站颜色：
+#ff0066 深红，头部背景
+#ff99cc 浅红，hover,边框
+#f6f6f6 灰色，右侧栏背景
+#2a6496 浅蓝色，链接字体
+#666	浅灰色，底部footer字体
+
+网站字体，分3个级别：
+16px	菜单（主菜单加粗），块的标题
+14px	网站默认字体
+12px	更多
+
+幻灯片图片大小：
+首页		358*287
+学堂首页
+
+--------------------------------------
+
+qq:2958262595,慧学网
+
+echo '<pre>';print_r();echo '</pre>';
+
+http://www.cj356.com/
+
+sudo mount -t cifs //192.168.1.100/touzilicai /home/wwwroot/touzilicai -o username=xujianjun,password=123456,rw,file_mode=0777,dir_mode=0777,noserverino
+
+后台进度：
+	文章管理已完成，还未测试 doing	done
+	标签该为富文本 done
+	理财产品	已完成，还未测试 doing
+	整理数据 doing
+
+	内容管理系统	undone
+
+
+前台进度：
+	学堂首页，目录页，文章页
+
+
+select td.*,ts.* from tree_data td left join tree_struct ts on td.id=ts.id where ts.id is null
+
+select ts.*,td.* from tree_struct ts left join tree_data td on ts.id=td.id where td.id is NULL
+
+delete from tree_struct where id in (select ts.id from tree_struct ts left join tree_data td on ts.id=td.id where td.id is NULL)
+
+select * from tree_struct where pid in (14,15,16,66)
+delete from tree_struct where pid in (14,15,16,66)
+delete from tree_struct where pid in (56,58,50,54,55,48,49)
