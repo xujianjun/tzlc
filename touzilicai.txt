@@ -25,7 +25,8 @@ sitemap									done
 404										done
 git版本库迁移								done,为了安全，老的touzilicai保留1周
 alpha环境的建立							done
-
+搜索按钮
+学堂菜单移到左边
 
 --------------------------------------
 网站颜色：
@@ -55,7 +56,7 @@ echo '<pre>';print_r();echo '</pre>';
 
 http://www.cj356.com/
 
-sudo mount -t cifs //192.168.1.100/touzilicai /home/wwwroot/touzilicai -o username=xujianjun,password=123456,rw,file_mode=0777,dir_mode=0777,noserverino
+sudo mount -t cifs //192.168.1.100/tzlc /home/wwwroot/touzilicai -o username=xujianjun,password=123456,rw,file_mode=0777,dir_mode=0777,noserverino
 
 后台进度：
 	文章管理已完成，还未测试 doing	done

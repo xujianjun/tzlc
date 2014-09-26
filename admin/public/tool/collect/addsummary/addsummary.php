@@ -1,6 +1,6 @@
 <?php
 
-//b,br,strong,font,mdash(-|,),quot(”),middot(.),helli,rsquo,Oslash,编者,编辑,div,img,本报讯
+//b,br,strong,font,mdash(-|,),quot(”),middot(.),helli,rsquo,Oslash,编者,编辑,div,img,本报讯,记者，实习生,新华网，文本刊记者
 
 header("Content-type: text/html; charset=utf-8");
 set_time_limit(0);
@@ -17,11 +17,11 @@ mysql_select_db('touzilicai', $lnk) or die ('Can\'t use foo : ' . mysql_error())
 mysql_query("set names utf8");
 
 $rows = array();
-//$sql:select td.* from tree_data td inner join tree_struct ts on td.id=ts.id where ts.type="article" and td.summary is NULL order by td.id
+//$sql:select td.* from tree_data td inner join tree_struct ts on td.id=ts.id where ts.type="article" and (td.summary is NULL or td.summary="") order by td.id
 $sql = 'select td.* from tree_data td ' .
 		'inner join tree_struct ts on td.id=ts.id ' .
-		'where ts.type="article" and ts.id not in (4390,5017,5018,4935,4936) and td.summary is NULL ' .
-		'order by td.id limit 100';
+		'where ts.type="article" and ts.id not in (4390) and (td.summary is NULL or td.summary="") ' .
+		'order by td.id limit 200';
 $result = mysql_query($sql);
 
 $total = mysql_affected_rows();
