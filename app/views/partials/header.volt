@@ -5,7 +5,7 @@
 		<div class="search-box">
 			<div class="col-lg-6">
 			    <div class="input-group">
-			      <input type="text" class="form-control" placeholder="请输入关键字" />
+			      <input type="text" class="form-control" placeholder="请输入关键字" onkeypress="toSearch()" />
 			      <span class="input-group-btn">
 			        <button class="btn btn-default" type="button">Go!</button>
 			      </span>

@@ -1,13 +1,14 @@
 
 
-slider改用boots的							done（无数据）
-学堂sidebar改改							done（无数据）
-增加一个widget，带图片的。放到首页右侧			done，适用财富生活，暂无数据
-首页从2楼开始分左右2大栏						done,右侧无数据
-学堂首页从2楼开始分左右2大栏					done,右侧无数据
+slider改用boots的							done
+首页slider数据
+学堂sidebar数据
+增加一个widget，带图片的。放到首页和学堂首页右侧		done，适用财富生活，暂无数据
+首页从2楼开始分左右2大栏						done
+学堂首页从2楼开始分左右2大栏					done
 后台添加选择图片功能						cancel
 tag数据的修复								done， 170个没有tag的node article
-summary数据的修复							done, 1000+个无数据的
+summary数据的修复							done
 现货，保险产品评测数据						done
 csz使用后台总是乱码，但dzh用的时候就没问题
 panel右侧padding有问题，在非首页				done
@@ -25,9 +26,12 @@ sitemap									done
 404										done
 git版本库迁移								done,为了安全，老的touzilicai保留1周
 alpha环境的建立							done
-搜索按钮
-学堂菜单移到左边
-
+搜索按钮									done
+学堂菜单移到左边							done
+学堂菜单收缩启用慢效果
+文章去重									done
+网站logo
+学堂菜单，学堂首页，首页加箭头图片
 --------------------------------------
 网站颜色：
 #ff0066 深红，头部背景

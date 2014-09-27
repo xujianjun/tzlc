@@ -361,6 +361,7 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 			$breadcrumb .= '<li><a href="/tag/'.$this->_params['tag']->pinyinPrefix.'/">标签</a></li>';
 			$breadcrumb .= '<li class="active"><a href="/tag/'.$this->_params['tag']->id.'.html"></li>'.$this->_params['tag']->name.'</a>';
 		}
+		echo $breadcrumb;
 		if ($breadcrumb){
 			$breadcrumb = '<li><a href="/">首页</a></li>' . $breadcrumb;
 		}
@@ -495,7 +496,11 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 									));
 						$nodes = array();
 						foreach ($temNodes as $key=>$temNode){
-							$treeData = $temNode->TreeData->toArray();
+							$treeData = array();
+							if ($temNode->TreeData){
+								$treeData = $temNode->TreeData->toArray();
+							}
+
 							$nodes[$key] = $temNode->toArray();
 							$nodes[$key]['TreeData'] = $treeData;
 						}

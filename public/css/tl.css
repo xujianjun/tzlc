@@ -5,7 +5,7 @@ ul{list-style:none;}
 .fleft{float:left;}
 .fright{float:right;}
 
-.xt-col-rgt{padding-left:20px;}
+.xt-col-rgt{padding-right:20px;}
 .xt-col-rgt .panel{padding:20px 0 10px 0;}
 
 .l-h-topright{padding:10px 0;}
