@@ -1,13 +1,14 @@
 
-function toSearch(){
+function toSearch(from){
 	if(event.keyCode == 13){
-		goSearch();
+		goSearch(from);
 	}
 }
-function goSearch(){
-	var keyword = $('.search-box input.form-control').val();
+function goSearch(from){
+	var fromClass = from=='page' ? 'page-search-box' : 'search-box';
+	var keyword = $('.'+fromClass+' input.form-control').val();
   	if (!keyword){
-  		$('.search-box input.form-control').focus();
+  		$('.'+fromClass+' input.form-control').focus();
   		return false;
   	}
   	var searchLink = '/search/'+keyword+'/';
