@@ -219,7 +219,7 @@ box-shadow:0 1px 6px rgba(0, 0, 0, 0.2);z-index:998;border-top:none;}
 .lilv th{width:50%;}
 .lilv thead tr{background-color:#ff99cc;opacity:0.9;}
 
-.tl-list-header{padding:10px 20px;background-color:#ff99cc;text-align:center;}
+.tl-list-header{padding:10px 20px;background-color:#f6f6f6;text-align:center;}
 .tl-list-header a{padding-right:10px;}
 .tl-list-header a.active,.tl-list-header a:hover{color:#ff0066;}
 

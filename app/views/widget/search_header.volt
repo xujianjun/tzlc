@@ -1,3 +1,4 @@
+
 <div class="search_header">
 	<div class="page-search-box">
 		<div class="col-lg-6">

@@ -1,4 +1,3 @@
-
 <div class="header">
 	<div class="header-top">
 		<div class="logo"><a href="#"><img src="/img/logo.jpg" /></a></div>
