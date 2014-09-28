@@ -282,7 +282,7 @@ box-shadow:0 1px 6px rgba(0, 0, 0, 0.2);z-index:998;border-top:none;}
 	cursor:pointer;
 }
 
-.xtsidebar .sub-list:not(.active){display:none;margin: 5px 0 0;}
+//.xtsidebar .sub-list:not(.active){display:none;margin: 5px 0 0;}
 //.xtsidebar .sub-list a.active{color:#666;}
 .xtsidebar .sub-list li{
 	background-color: #ff99cc;

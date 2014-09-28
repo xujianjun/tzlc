@@ -26,9 +26,9 @@ sitemap									done
 404										done
 git版本库迁移								done,为了安全，老的touzilicai保留1周
 alpha环境的建立							done
-搜索按钮									done，搜索页面不能用
+搜索按钮									done
 学堂菜单移到左边							done
-学堂菜单收缩启用慢效果
+学堂菜单收缩启用慢效果						done
 文章去重									done
 网站logo
 学堂菜单，学堂首页，首页加箭头图片

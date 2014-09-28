@@ -33,8 +33,9 @@ $(function(){
   });
 
   $('.xtsidebar ul.list > li').on('click', function(){
-  	$(this).siblings('li').find('.sub-list').removeClass('active');
-  	$(this).find('.sub-list').toggleClass('active');
+  	$(this).siblings('li').find('.sub-list').hide();
+  	$(this).find('.sub-list').slideToggle("slow", function() {});
+  	//$(this).find('.sub-list').toggleClass('active');
   	return false;
   });
   $('.xtsidebar ul.sub-list > li').on('click', function(){
