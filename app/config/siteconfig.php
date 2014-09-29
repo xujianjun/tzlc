@@ -20,9 +20,6 @@ return new \Phalcon\Config(array(
         'secMenuRootNid' => 6977,
         'recommendNodeNum' => 6,
         'articleRootNid' => 2,
-        'hotNids' => '',
-        'homeSliderNids' => '',
-        'xtSliderNids' => '',
     ),
     'widgetCfg'	=> array(
     	'cidianCloudNum' => 30,
@@ -32,15 +29,16 @@ return new \Phalcon\Config(array(
     ),
     'slider' => array(
 		'home' => array(
-			array('title'=>'', 'img_path'=>'', 'link'=>'', 'alt'=>''),
-			array('title'=>'', 'img_path'=>'', 'link'=>'', 'alt'=>''),
-			array('title'=>'', 'img_path'=>'', 'link'=>'', 'alt'=>''),
+			array('title'=>'丈夫一人挣钱风险大 设置备用金增家庭保险', 'img_path'=>'/img/slider/hs-byj.jpg', 'link'=>'/wealth/story/6333.html', 'alt'=>'丈夫一人挣钱风险大 设置备用金增家庭保险'),
+			array('title'=>'单身工薪族应稳健当先 放弃短线思路', 'img_path'=>'/img/slider/hs-wj.jpg', 'link'=>'/wealth/story/6343.html', 'alt'=>'单身工薪族应稳健当先 放弃短线思路'),
+			array('title'=>'月入近1万元家庭 如何理财积攒创业资本', 'img_path'=>'/img/slider/hs-jt.jpg', 'link'=>'/wealth/story/6360.html', 'alt'=>'月入近1万元家庭 如何理财积攒创业资本'),
+			array('title'=>'月入六千 单身汉如何理财', 'img_path'=>'/img/slider/hs-dsh.jpg', 'link'=>'/wealth/story/6388.html', 'alt'=>'月入六千 单身汉如何理财'),
 		),
 		'school' => array(
-			array('title'=>'', 'img_path'=>'', 'link'=>'', 'alt'=>''),
-			array('title'=>'', 'img_path'=>'', 'link'=>'', 'alt'=>''),
-			array('title'=>'', 'img_path'=>'', 'link'=>'', 'alt'=>''),
-			array('title'=>'', 'img_path'=>'', 'link'=>'', 'alt'=>''),
+			array('title'=>'威廉指标（W％R）', 'img_path'=>'/img/slider/ss-wl.jpg', 'link'=>'/trade/tech/583.html', 'alt'=>'威廉指标（W％R）'),
+			array('title'=>'K线六种形态', 'img_path'=>'/img/slider/ss-kx.jpg', 'link'=>'/trade/tech/517.html', 'alt'=>'K线六种形态'),
+			array('title'=>'相对强弱指标（RSI）', 'img_path'=>'/img/slider/ss-rsi.jpg', 'link'=>'/trade/tech/581.html', 'alt'=>'相对强弱指标（RSI）'),
+			array('title'=>'怎样研判成交量的变化', 'img_path'=>'/img/slider/ss-cjl.jpg', 'link'=>'/trade/tech/542.html', 'alt'=>'怎样研判成交量的变化'),
 		),
 	),
     'blockCfg'	=> array(
@@ -116,4 +114,5 @@ return new \Phalcon\Config(array(
 		'StaticController-sitemap' => array('keywords' => '网站地图，投资，理财', 'description' => ''),
     ),
     'hotNids' => array(6864,6867,6884,6886,6888,6903),
+    'dailywordTids' => array(9,37,55,60,71,89,90),
 ));

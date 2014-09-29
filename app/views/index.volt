@@ -9,11 +9,11 @@
 		<!-- 最新 Bootstrap 核心 CSS 文件 -->
 		<link rel="stylesheet" href="/css/bts-tl.css">
 		<link rel="stylesheet" href="/css/tl.css">
-		<link rel="stylesheet" href="/css/nivo-slider.css">
+		<!-- <link rel="stylesheet" href="/css/nivo-slider.css"> -->
 
 		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 		<script src="/js/jquery/jquery-1.10.2.min.js"></script>
-		<script src="/js/jquery/jquery.nivo.slider.js"></script>
+		<!-- <script src="/js/jquery/jquery.nivo.slider.js"></script> -->
 		<script src="/js/jquery/jquery.tl.js"></script>
 	</head>
 	<body>

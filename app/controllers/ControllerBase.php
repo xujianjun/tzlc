@@ -399,9 +399,11 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 				break;
 			case 'dailyword':
 				$dailyword['title'] = '天天词汇';
+				$dailywordTids = $this->_siteConfig['dailywordTids'];
+				shuffle($dailywordTids);
 				$dailyword['word'] = Tags::findFirst(array(
-										"conditions" => "is_cidian = ?1",
-										"bind"       => array(1 => 1)
+										"conditions" => "is_cidian = ?1 and id = ?2",
+										"bind"       => array(1 => 1, 2 => $dailywordTids[0])
 									))->toArray();
 				$widgetData = $dailyword;
 				break;

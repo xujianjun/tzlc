@@ -23,6 +23,7 @@ $(function(){
     $(this).tab('show');
   })*/
   //$('.cidian a').tagcloud();
+  /*
   $('#slider').nivoSlider();
 
   $('.xtsidebar > ul > li > span').on('click', function(){
@@ -42,7 +43,7 @@ $(function(){
   	var aLink = $(this).find('a').attr('href');
   	window.location = aLink;
   	return false;
-  });
+  });*/
 
   $('.search-box button.btn').on('click', function(){
   	goSearch();
@@ -101,5 +102,12 @@ $(function(){
 	$('#tl-nav .nav-item').dropdown({
 		dropdownEl:'.nav-dropdown',
 		openedClass:'hover'
+	});
+
+	$('.dw-change button').on('click', function(){
+		$.get('/api/dailyword/', function(data){
+			$('.dailyword .dw-title').html('<a href="/tag/'+data.dailyword.word.id+'.html">'+data.dailyword.word.name+'</a>');
+			$('.dailyword .dw-desc').text(data.dailyword.word.description);
+		}, 'json');
 	});
 });

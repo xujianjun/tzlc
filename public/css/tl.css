@@ -227,7 +227,19 @@ box-shadow:0 1px 6px rgba(0, 0, 0, 0.2);z-index:998;border-top:none;}
 .tl-tag-list-header a{padding:0 7px;}
 .tl-tag-list-header a.active{color:#ff0066;}
 .dailyword{padding:10px;}
-
+.dailyword .dw-title{font-weight: bold;padding: 5px;}
+.dailyword .dw-desc{text-indent: 15px;line-height: 25px;}
+.dailyword-panel .panel-body{height:245px;}
+.dailyword-panel .dw-change{text-align:center;}
+.dailyword-panel .dw-change button{
+font-size: 25px;
+padding: 5px 10px;
+background-color: #ff99cc;
+color: #fff;
+cursor: pointer;
+outline:none;
+}
+.dailyword-panel .dw-more{text-align:right;padding: 10px 20px 10px 0;}
 
 .content_title{padding:0 10px 10px;border-bottom:1px dotted #ff99cc;}
 .static-content .content_title{text-align:center;letter-spacing:5px;}
@@ -296,6 +308,9 @@ box-shadow:0 1px 6px rgba(0, 0, 0, 0.2);z-index:998;border-top:none;}
 
 
 #carousel-generic{padding:10px 20px 10px 0;}
+#carousel-generic img{height:288px;}
+.home-slide img{width:360px;}
+.school-slide img{width:740px;}
 
 .tl-siblings{padding:10px;width:100%;}
 

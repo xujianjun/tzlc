@@ -66,6 +66,10 @@ $router->add("/widget/{widget:[a-zA-Z0-9\-_]+}/", array(
     'controller' => 'widget',
     'action' => 'index'
 ));
+$router->add("/api/{api:[a-zA-Z0-9\-_]+}/", array(
+    'controller' => 'api',
+    'action' => 'index'
+));
 
 $router->add("/search/{search_keyword:[\s\S]+}/", array(
     'controller' => 'page',
