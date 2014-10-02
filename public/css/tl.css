@@ -18,6 +18,9 @@ ul{list-style:none;}
 .l-h-left .tl-nav-tab,.l-xth-left .tl-nav-tab{padding: 10px 20px 10px 0;}
 .l-p-right .panel,.l-xth-right .panel{padding:20px 0;}
 
+.lilv{padding-bottom:15px;}
+.hangqing{padding:15px 0;}
+
 .header-top{
   height: 80px;
   width:100%;
@@ -294,7 +297,7 @@ outline:none;
 	cursor:pointer;
 }
 
-//.xtsidebar .sub-list:not(.active){display:none;margin: 5px 0 0;}
+.xtsidebar .sub-list:not(.active){display:none;margin: 5px 0 0;}
 //.xtsidebar .sub-list a.active{color:#666;}
 .xtsidebar .sub-list li{
 	background-color: #ff99cc;
@@ -388,7 +391,7 @@ a.nivo-prevNav {
 	  margin: 10px 20px 0 0;
 }
 
-.widget-panel2{width:380px;margin:10px 0;}
+.widget-panel2{width:380px;margin:15px 0;}
 .widget-panel2 .w-title{overflow:hidden;height:38px;float:left;line-height:38px;width:100%;background:url(/img/bg-line.png) 0 100% repeat-x;}
 .widget-panel2 .w-title .title{border-bottom:2px solid #ff0066;padding: 0 10px;}
 .widget-panel2 .w-title .title h3{font-size:16px;padding:0;margin:0;line-height:36px;}
@@ -413,8 +416,10 @@ a.nivo-prevNav {
 	height: 30px;
 	line-height: 30px;
 }
-.widget-panel2 .w-header .fright p{
+.widget-panel2 .w-header .fright .desc{
 	line-height: 24px;
+	height:50px;
+	overflow:hidden;
 }
 
 .widget-panel2 ul.w-list{padding: 10px 0;}

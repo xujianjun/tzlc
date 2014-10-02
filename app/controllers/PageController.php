@@ -8,11 +8,12 @@ class PageController extends ControllerBase
     	$this->view->disableLevel(View::LEVEL_LAYOUT);
     	$this->_initPageData(array(
 								'slider--school','dailyword',
-								'navTab--stockSchool_basic_method','panel--stockSchool_trade','hangqing',
+								'navTab--stockSchool_basic_method','panel--stockSchool_trade',
 								'panel--fundSchool_basic','navTab--fundSchool_open_close','panel--fundSchool_money','panel--fundSchool_trade',
 								'panel--forexSchool_basic','panel--forexSchool_trade',
 								'panel--metalSchool_basic','panel--metalSchool_trade',
 								'panel--otherSchool_bank','panel--otherSchool_insurance','navTab--otherSchool_spot_futures','panel--otherSchool_gold',
+								'hangqing','lilv','panel2--wealth_story','panel3--wealth_plan',
 							));
     }
     public function xtListAction(){

@@ -9,7 +9,7 @@ class Tags extends Model
 		$this->hasMany('id', 'ArticleTags', 'tid');
 	}
 
-	public function fetchCidiansCloud($cidianCloudNum){
+	public static function fetchCidiansCloud($cidianCloudNum){
 		$totalTags = Tags::count(array(
 									'is_cidian'=>1,
 //									'published'=>1

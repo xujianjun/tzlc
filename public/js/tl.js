@@ -32,7 +32,7 @@ $(function(){
   $('.xtsidebar .sub-list li').on('click', function(evt){
   	evt.preventDefault();
   });
-
+*/
   $('.xtsidebar ul.list > li').on('click', function(){
   	$(this).siblings('li').find('.sub-list').hide();
   	$(this).find('.sub-list').slideToggle("slow", function() {});
@@ -43,7 +43,7 @@ $(function(){
   	var aLink = $(this).find('a').attr('href');
   	window.location = aLink;
   	return false;
-  });*/
+  });
 
   $('.search-box button.btn').on('click', function(){
   	goSearch();

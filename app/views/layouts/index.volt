@@ -42,8 +42,9 @@
 	</div>
 	<div class="col-xs-6 col-md-4 l-h-right">
 		{{ partial("widget/lilv", ['lilv':pageData['lilv']]) }}
+		{{ partial("widget/hangqing", ['hangqing':pageData['hangqing']]) }}
 		{{ partial("widget/panel2", ['items':pageData['panel2']['wealth_story']['items']]) }}
-		{{ partial("widget/panel2", ['items':pageData['panel2']['wealth_plan']['items']]) }}
+		{{ partial("widget/panel3", ['items':pageData['panel3']['wealth_plan']['items']]) }}
 	</div>
 </div>
 

@@ -596,12 +596,13 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 			case 'navTab':
 			case 'panel':
 			case 'panel2':
+			case 'panel3':
 				$widgetData[$block]['blockName'] = $block;
 				$widgetData[$block]['items'] = array();
 				if (isset($this->_siteConfig['blockCfg'][$view.'_'.$block])){
 					$blockParams = $this->_siteConfig['blockCfg'][$view.'_'.$block];
 					foreach ($blockParams as $blockParam){
-						$nodeLists = array('title'=>$blockParam['title'], 'data'=>array());
+						$nodeLists = array('title'=>$blockParam['title'], 'link'=> $blockParam['link'], 'data'=>array());
 						$blockNode = TreeStruct::findFirst($blockParam['nid']);
 						$temNodes = TreeStruct::find(array(
 												'conditions' => "lft>?1 and rgt<?2 and type=:type:",

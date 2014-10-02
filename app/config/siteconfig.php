@@ -20,6 +20,8 @@ return new \Phalcon\Config(array(
         'secMenuRootNid' => 6977,
         'recommendNodeNum' => 6,
         'articleRootNid' => 2,
+        'tzalHeadNid' => 6348,
+        'lcghHeadNid' => 6751
     ),
     'widgetCfg'	=> array(
     	'cidianCloudNum' => 30,
@@ -41,6 +43,22 @@ return new \Phalcon\Config(array(
 			array('title'=>'怎样研判成交量的变化', 'img_path'=>'/img/slider/ss-cjl.jpg', 'link'=>'/trade/tech/542.html', 'alt'=>'怎样研判成交量的变化'),
 		),
 	),
+	'cfshHeadNode' => array(
+		/*'tzal' => array(
+			'title'=>'准购房族如何让首付款“赚起来”',
+			'desc' => '理财专家表示，对于平均年化收益率一般在3%左右的货币基金而言，好的“货基宝宝”常常毫厘必争。',
+			'img_path'=>'/img/cfsh-head/tzal.jpg',
+			'link'=>'/wealth/story/6348.html',
+			'alt'=>'准购房族'
+		),*/
+		'lcgs' => array(
+			'title'=>'犹太人如何培养孩子的财商',
+			'desc' => '犹太人善经商，天下人尽知，大名鼎鼎的格林斯潘、伯南克、巴菲特、索罗斯...',
+			'img_path'=>'/img/cfsh/lcgs-0.jpg',
+			'link'=>'/wealth/plan/6496.html',
+			'alt'=>'月入过万'
+		),
+	),
     'blockCfg'	=> array(
     	'slider_home' => array(array('nid' => 29,'title' => '投资案例')),
         'slider_school' => array(array('nid' => 9,'title' => '财经学堂')),
@@ -56,8 +74,8 @@ return new \Phalcon\Config(array(
         'panel_school_gold' => array(array('nid' => 25,'title' => '黄金学堂')),
         'navTab_trade_basic_tech' => array(array('nid' => 26,'title' => '基本面分析'), array('nid' => 27,'title' => '技术面分析')),
         'panel_trade_master' => array(array('nid' => 28,'title' => '大师攻略')),
-        'panel2_wealth_story' => array(array('nid' => 29,'title' => '投资案例')),
-        'panel2_wealth_plan' => array(array('nid' => 30,'title' => '理财规划')),
+        'panel2_wealth_story' => array(array('nid' => 29,'title' => '投资案例', 'link' => '/wealth/story/')),
+        'panel3_wealth_plan' => array(array('nid' => 30,'title' => '理财规划', 'link' => '/wealth/plan/')),
         //'panel2_wealth_product' => array(array('nid' => 31,'title' => '产品评测')),
 
         'navTab_stockSchool_basic_method' => array(array('nid' => 34,'title' => '基础知识'),array('nid' => 36,'title' => '操盘攻略')),
