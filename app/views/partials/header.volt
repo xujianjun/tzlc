@@ -1,6 +1,6 @@
 <div class="header">
 	<div class="header-top">
-		<div class="logo"><a href="#"><img src="/img/logo.png" /></a></div>
+		<div class="logo"><a href="/"><img src="/img/logo.png" /></a></div>
 		<div class="search-box">
 			<div class="col-lg-6">
 			    <div class="input-group">
