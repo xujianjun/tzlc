@@ -537,8 +537,8 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 							$nodes = array();
 							foreach ($tagNodes as $key=>$tagNode){
 								$treeStruct = $tagNode->TreeStruct;
-								$treeData = $treeStruct->TreeData->toArray();
-								$nodes[$key] = $treeStruct->toArray();
+								$treeData = $treeStruct->TreeData ? $treeStruct->TreeData->toArray() : array();
+								$nodes[$key] = $treeStruct ? $treeStruct->toArray() : array();
 								$nodes[$key]['TreeData'] = $treeData;
 							}
 							$nodes = TreeStruct::addNodesAttr($nodes, array('menu'=>true, 'menuLevel'=>2));
