@@ -730,15 +730,17 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 								break;
 							}
 							$prevTag = Tags::findFirst(array(
-													'conditions' => "pinyinPrefix=:pinyin:",
-													'bind' => array('pinyin'=>$pinyinPrefix),
+													'conditions' => "pinyinPrefix=:pinyin: and id<?1",
+													'bind' => array('pinyin'=>$pinyinPrefix, 1=>$tag->id),
 													'order' => 'id desc',
-												))->toArray();
+												));
+							$prevTag = $prevTag ? $prevTag->toArray() : array();
 							$nextTag = Tags::findFirst(array(
-													'conditions' => "pinyinPrefix=:pinyin:",
-													'bind' => array('pinyin'=>$pinyinPrefix),
+													'conditions' => "pinyinPrefix=:pinyin: and id>?1",
+													'bind' => array('pinyin'=>$pinyinPrefix, 1=>$tag->id),
 													'order' => 'id asc',
-												))->toArray();
+												));
+							$nextTag = $nextTag ? $nextTag->toArray() : array();
 							$tags = array('prev'=>$prevTag, 'next'=>$nextTag);
 							$tags = Tags::addTagsAttr($tags);
 
