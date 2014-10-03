@@ -23,7 +23,7 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 
 	public function initialize() {
 		$this->view->setTemplateAfter('main');
-		Tag::setTitle('财途网');
+		Tag::setTitle('慧学网');
 		Tag::setTitleSeparator(' - ');
 
 		$this->_initLibrary();
