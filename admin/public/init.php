@@ -3,8 +3,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-define('SMARTY_DIR', '/usr/local/lib/Smarty-3.1.18/libs/');
 define('ROOT_PATH', dirname(__DIR__));
+define('SMARTY_DIR', ROOT_PATH . '/libs/Smarty-3.1.18/libs/');
 
 set_include_path(ROOT_PATH . '/libs' . PATH_SEPARATOR . get_include_path());
 
