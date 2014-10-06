@@ -26,7 +26,7 @@ class PageController extends ControllerBase
     public function xtSingleAction(){
     	$this->view->disableLevel(View::LEVEL_LAYOUT);
     	$this->_initPageData(array(
-								'breadcrumb','nodetag','content--node','siblings--node','panel--relation',
+								'breadcrumb','bdshare', 'nodetag','content--node','siblings--node','panel--relation',
 								'xtSidebars','panel--hot'
 							));
     }
@@ -39,7 +39,7 @@ class PageController extends ControllerBase
     }
     public function singleAction(){
     	$this->_initPageData(array(
-								'breadcrumb','nodetag','content--node','siblings--node','panel--relation',
+								'breadcrumb','bdshare','nodetag','content--node','siblings--node','panel--relation',
 								'cidian','panel--hot', 'lilv'
 							));
     }
@@ -52,7 +52,7 @@ class PageController extends ControllerBase
 	}
     public function tagSingleAction(){
     	$this->_initPageData(array(
-								'breadcrumb','content--tag','siblings--tag','list--tagnode',
+								'breadcrumb','bdshare','content--tag','siblings--tag','list--tagnode',
 								'cidian','panel--hot', 'lilv'
 							));
     }
