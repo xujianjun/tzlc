@@ -49,7 +49,11 @@ tag 上下有问题							done
 	外链（和讯）
 http://www.licaimap.com/school/fund/的列表有问题
 部分文章页有问题
---------------------------------------
+百度分享									done
+百度站内搜索								done
+搜狗站长平台								done
+nid，tid不存在跳到404						doing, response->redirect unwork;解决办法:使用header
+-------------------------------------
 网站颜色：
 #ff0066 深红，头部背景
 #ff99cc 浅红，hover,边框

@@ -76,6 +76,10 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 		}
 		if ($params['nid']){
 			$node = TreeStruct::findFirst($params['nid']);
+			if (!$node){
+				header("Location: /notfound/",TRUE,301);
+				exit();
+			}
 			$params['node'] = $node;
 			$params['nodeData'] = $node->TreeData;
 			$relationTreeNodes = TreeStruct::findRelationTrees($node);
@@ -144,6 +148,10 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 		}
 		if ($params['tid']){
 			$tag = Tags::findFirst($params['tid']);
+			if (!$tag){
+				header("Location: /notfound/",TRUE,301);
+				exit();
+			}
 			$params['tag'] = $tag;
 		}
 //		echo '<pre>';print_r($params['node']->toArray());echo '</pre>';die();
@@ -361,7 +369,6 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 			$breadcrumb .= '<li><a href="/tag/'.$this->_params['tag']->pinyinPrefix.'/">标签</a></li>';
 			$breadcrumb .= '<li class="active"><a href="/tag/'.$this->_params['tag']->id.'.html"></li>'.$this->_params['tag']->name.'</a>';
 		}
-		echo $breadcrumb;
 		if ($breadcrumb){
 			$breadcrumb = '<li><a href="/">首页</a></li>' . $breadcrumb;
 		}
@@ -410,8 +417,11 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 			case 'content':
 				switch ($block){
 					case 'node':
-						$content = TreeData::findFirst($this->_params['nid'])->toArray();
-						$content['content'] = htmlspecialchars_decode($content['content']);
+						$contentObj = TreeData::findFirst($this->_params['nid']);
+						if ($contentObj){
+							$content = $contentObj->toArray();
+							$content['content'] = htmlspecialchars_decode($content['content']);
+						}
 						$widgetData[$block]['content'] = $content;
 						break;
 					case 'tag':
