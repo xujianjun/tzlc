@@ -3,7 +3,7 @@
 return new \Phalcon\Config(array(
     'siteCfg'	=> array(
         'title'  	=> '慧学网',
-        'subTitle'  => '您的理财知识库',
+        'subTitle'  => '身边的理财知识库',
         'logoFile' 	=> APP_PATH . '/public/img/logo.png',
     ),
     'cacheCfg' 	=> array(
@@ -94,7 +94,7 @@ return new \Phalcon\Config(array(
         'panel_otherSchool_gold' => array(array('nid' => 25,'title' => '黄金学堂')),
     ),
     'pageTitle' => array(
-		'IndexController-index' => array('首页'),
+		'IndexController-index' => array('股票.贵金属.理财知识'),
 		'PageController-xtHome' => array('财经学堂'),
 
 		'PageController-xtList' => array(),
