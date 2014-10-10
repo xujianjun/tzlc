@@ -131,6 +131,6 @@ return new \Phalcon\Config(array(
 		'StaticController-mianze' => array('keywords' => '免责条款，投资，理财', 'description' => ''),
 		'StaticController-sitemap' => array('keywords' => '网站地图，投资，理财', 'description' => ''),
     ),
-    'hotNids' => array(6864,6867,6884,6886,6888,6903),
+    'hotNids' => array(7184,7133,7148,1870,6407,7172),
     'dailywordTids' => array(9,37,55,60,71,89,90),
 ));

@@ -4,6 +4,7 @@ ul{list-style:none;}
 .clear{clear: both;}
 .fleft{float:left;}
 .fright{float:right;}
+a{outline:none !important;}
 
 .xt-col-rgt{padding-right:20px;}
 .xt-col-rgt .panel{padding:20px 0 10px 0;}
@@ -97,7 +98,7 @@ ul{list-style:none;}
   border-radius: 0 0 5px 5px;
 }
 
-#tl-nav{font-size:16px;font-family:"微软雅黑","宋体";display:-webkit-box;background-color:#ff0066;}
+#tl-nav{font-size:16px;font-family:"微软雅黑","宋体";display:inline-block;background-color:#ff0066;}
 #tl-nav a:hover{text-decoration:none}
 #tl-nav .nav-item,#tl-nav .nav-link{position:relative;float:left;display:block;color:#fff;z-index:1000;}
 #tl-nav .nav-link{
