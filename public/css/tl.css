@@ -5,6 +5,7 @@ ul{list-style:none;}
 .fleft{float:left;}
 .fright{float:right;}
 a{outline:none !important;}
+.panel-title a{color:#fff;}
 
 .xt-col-rgt{padding-right:20px;}
 .xt-col-rgt .panel{padding:20px 0 10px 0;}
