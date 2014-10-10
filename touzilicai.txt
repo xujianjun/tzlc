@@ -4,22 +4,18 @@
 	热门文章，6篇
 	今日词汇，10个随机
 
-
-
---------------------------------------
+--------------- done start -----------------------
 slider改用boots的							done
-首页slider数据							done, untest
-学堂sidebar数据							done, untest
-增加一个widget，带图片的。放到首页和学堂首页右侧		done，适用财富生活，暂无数据
+首页slider数据							done
+学堂sidebar数据							done
+增加一个widget，带图片的。放到首页和学堂首页右侧	done
 首页从2楼开始分左右2大栏						done
 学堂首页从2楼开始分左右2大栏					done
 后台添加选择图片功能						cancel
 tag数据的修复								done， 170个没有tag的node article
 summary数据的修复							done
 现货，保险产品评测数据						done
-csz使用后台总是乱码，但dzh用的时候就没问题
-panel右侧padding有问题，在非首页			done
-热门标签（居中）
+panel右侧padding有问题，在非首页				done
 有的没有链接								done
 首页菜单加上分割线							done
 meta title								done
@@ -28,7 +24,7 @@ tag页面的上一篇，下一篇						done
 贵金属修复，现货，保险内容					done
 产品评测暂不发布内容						deleted
 二级菜单									done
-静态页面									doing
+静态页面									done
 sitemap									done
 404										done
 git版本库迁移								done,为了安全，老的touzilicai保留1周
@@ -37,24 +33,34 @@ alpha环境的建立							done
 学堂菜单移到左边							done
 学堂菜单收缩启用慢效果						done
 文章去重									done
+开发环境从虚拟机转向本机，数据库也是			done
+tag 上下有问题							done
+热门标签									done
+百度分享									done
+百度站内搜索								done
+搜狗站长平台								done
+nid，tid不存在跳到404						done, response->redirect unwork;解决办法:使用header
+--------------- done end -----------------------
+
+--------------- undone start -----------------------
+csz使用后台总是乱码，但dzh用的时候就没问题
 网站logo
 学堂菜单，学堂首页，首页加箭头图片
-开发环境从虚拟机转向本机，数据库也是			done
-慢日志
+mysql慢日志
 node url字段
 tag	pinyin字段
-tag 上下有问题							done
 删除文章中含有
 	新浪微博客户端
 	外链（和讯）
 http://www.licaimap.com/school/fund/的列表有问题
 部分文章页有问题
-百度分享									done
-百度站内搜索								done
-搜狗站长平台								done
-nid，tid不存在跳到404						doing, response->redirect unwork;解决办法:使用header
 ie8,ie10,百度浏览器的兼容性
--------------------------------------
+widget头部加链接或者更多
+文章url和tag的拼音都写到表里，当有改动时即时改动
+--------------- undone end -----------------------
+
+
+
 网站颜色：
 #ff0066 深红，头部背景
 #ff99cc 浅红，hover,边框
@@ -107,3 +113,5 @@ delete from tree_struct where id in (select ts.id from tree_struct ts left join 
 select * from tree_struct where pid in (14,15,16,66)
 delete from tree_struct where pid in (14,15,16,66)
 delete from tree_struct where pid in (56,58,50,54,55,48,49)
+
+http://xinyu.baidu.com/,yuming,daxiexingmima
