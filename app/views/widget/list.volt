@@ -4,7 +4,7 @@
   	{% for item in items %}
     <div class="list-group-item">
       <div class="list-dtime"></div>
-      <a href="{{ item['link'] }}"><h4 class="list-group-item-heading">{{ item['TreeData']['title'] }}</h4></a>
+      <a href="{{ item['link'] }}" title="{{ item['TreeData']['title'] }}"><h4 class="list-group-item-heading">{{ item['TreeData']['title'] }}</h4></a>
       <p class="list-group-item-text">{{ item['TreeData']['summary'] }}</p>
     </div>
     {% endfor %}

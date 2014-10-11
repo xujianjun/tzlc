@@ -27,6 +27,7 @@ return new \Phalcon\Config(array(
     	'cidianCloudNum' => 30,
         'tagNodesNum' => 20,
         'listItemPer' => 20,
+        'tagListItemPer' => 30,
         'blockNum' => 6,
     ),
     'slider' => array(

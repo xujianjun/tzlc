@@ -8,9 +8,9 @@
 	<div class="clear"></div>
 	{% for key,value in items[0]['data'] %}
 	<div class="w-header">
-		<a class="fleft" href="{{ value['link'] }}"><img src="/img/cfsh/tzal-{{ key+1 }}.jpg" width="80" height="80" alt="{{ value['TreeData']['title'] }}"></a>
+		<a class="fleft" href="{{ value['link'] }}" title="{{ value['TreeData']['title'] }}"><img src="/img/cfsh/tzal-{{ key+1 }}.jpg" width="80" height="80" alt="{{ value['TreeData']['title'] }}" title="{{ value['TreeData']['title'] }}"></a>
 		<div class="fright">
-			<h3><a href="{{ value['link'] }}">{{ value['TreeData']['title'] }}</a></h3>
+			<h3><a href="{{ value['link'] }}" title="{{ value['TreeData']['title'] }}">{{ value['TreeData']['title'] }}</a></h3>
 			<div class="desc">{{ value['TreeData']['summary'] }}</div>
 		</div>
 	</div>

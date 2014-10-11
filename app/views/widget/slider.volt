@@ -10,7 +10,7 @@
   <div class="carousel-inner" role="listbox">
   	{% for key,value in items %}
     <div class="item {% if key==0 %}active{% endif %}">
-      <a href="{{ value['link'] }}"><img src="{{ value['img_path'] }}" alt="{{ value['alt'] }}"></a>
+      <a href="{{ value['link'] }}" title="{{ value['title'] }}"><img src="{{ value['img_path'] }}" alt="{{ value['alt'] }}" title="{{ value['title'] }}"></a>
       <div class="carousel-caption">{{ value['title'] }}</div>
     </div>
     {% endfor %}

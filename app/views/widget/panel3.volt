@@ -7,16 +7,16 @@
 	</div>
 	<div class="clear"></div>
 	<div class="w-header">
-		<a class="fleft" href="{{ siteConfig['cfshHeadNode']['lcgs']['link'] }}"><img src="{{ siteConfig['cfshHeadNode']['lcgs']['img_path'] }}" width="80" height="80" alt="{{ siteConfig['cfshHeadNode']['lcgs']['alt'] }}"></a>
+		<a class="fleft" href="{{ siteConfig['cfshHeadNode']['lcgs']['link'] }}" title="{{ siteConfig['cfshHeadNode']['lcgs']['title'] }}"><img src="{{ siteConfig['cfshHeadNode']['lcgs']['img_path'] }}" width="80" height="80" alt="{{ siteConfig['cfshHeadNode']['lcgs']['alt'] }}" title="{{ siteConfig['cfshHeadNode']['lcgs']['title'] }}" /></a>
 		<div class="fright">
-			<h3><a href="{{ siteConfig['cfshHeadNode']['lcgs']['link'] }}">{{ siteConfig['cfshHeadNode']['lcgs']['title'] }}</a></h3>
+			<h3><a href="{{ siteConfig['cfshHeadNode']['lcgs']['link'] }}" title="{{ siteConfig['cfshHeadNode']['lcgs']['title'] }}">{{ siteConfig['cfshHeadNode']['lcgs']['title'] }}</a></h3>
 			<p>{{ siteConfig['cfshHeadNode']['lcgs']['desc'] }}</p>
 		</div>
 	</div>
 	<div class="clear"></div>
 	<ul class="w-list">
 		{% for value in items[0]['data'] %}
-        <li><a href="{{ value['link'] }}">{{ value['TreeData']['title'] }}</a></li>
+        <li><a href="{{ value['link'] }}" title="{{ value['TreeData']['title'] }}">{{ value['TreeData']['title'] }}</a></li>
         {% endfor %}
 	</ul>
 </div>

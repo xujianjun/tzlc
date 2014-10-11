@@ -52,11 +52,13 @@ tag	pinyin字段
 删除文章中含有
 	新浪微博客户端
 	外链（和讯）
-http://www.licaimap.com/school/fund/的列表有问题
+http://www.licaimap.com/school/fund/的列表有问题		doing,和添加path字段一起做
 部分文章页有问题
 ie8,ie10,百度浏览器的兼容性
 widget头部加链接或者更多
 文章url和tag的拼音都写到表里，当有改动时即时改动
+sitemap.txt可生成的
+词汇和关键字
 --------------- undone end -----------------------
 
 
@@ -79,6 +81,11 @@ widget头部加链接或者更多
 logo	210*68
 
 --------------------------------------
+
+推广：
+	站长平台： 百度、 搜狗、 bing、 360搜索。提交url、sitemap
+	网络社区： 百度知道，360问答
+	社交媒体： 微信
 
 qq:2958262595,慧学网
 root !licai|map|root!

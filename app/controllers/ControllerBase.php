@@ -86,57 +86,29 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 			$params['nodeParents'] = $relationTreeNodes['parent'];
 			$params['nodeChilds'] = $relationTreeNodes['child'];
 			$params['nodeSiblings'] = $relationTreeNodes['sibling'];
-			$path = '';
-			foreach ($params['nodeParents'] as $parentNode){
-				$ptitle_en = $parentNode->TreeData->title_en;
-				if (!$ptitle_en){
-					continue;
-				}
-				$path .= '/'.$ptitle_en;
-			}
-//			echo 'path:'.$path.'<br>';
-//			echo 'nten:'.$nten.',nten2:'.$nten2.'<br>';die();
 
-			$urlPathTitle = array($nten, $nten2, $nten3);
-			if ($urlPathTitle[0] || $urlPathTitle[1] || $urlPathTitle[2]){
-				foreach ($urlPathTitle as $key=>$value){
-					if (!$value){
-						unset($urlPathTitle[$key]);
-					}
-				}
-				reset($urlPathTitle);
-				foreach ($params['nodeParents'] as $parentNode){
-					$ptitle_en = $parentNode->TreeData->title_en;
-					if (!$ptitle_en){
-						continue;
-					}
-//					echo 'etitle:'.$ptitle_en.'<br>';
-//					echo '<pre>';print_r($urlPathTitle);echo '</pre>';
-					if ($ptitle_en == $urlPathTitle[key($urlPathTitle)]){
-						unset($urlPathTitle[key($urlPathTitle)]);
-//						echo '<pre>';print_r($urlPathTitle);echo '</pre><hr>';
-						if (count($urlPathTitle) == 0){
-							break;
-						}
-					}
-				}
-
-//				echo '<pre>';print_r($urlPathTitle);echo '</pre>';die();
-				if (count($urlPathTitle) > 0){
-					$url = $path.'/'.$params['nid'].'.html';
-					 $this->response->redirect($url, true, 301);
-			        //Disable the view to avoid rendering
-			        $this->view->disable();
-				}
+			$temPath = '/'.$nten.'/';
+			if ($nten2){ $temPath .= $nten2.'/'; }
+			if ($nten3){ $temPath .= $nten3.'/'; }
+			if ($node->type == 'article'){
+				$temPath .= $node->id.'.html';
 			}
+			if ($node->TreeData->link && $node->TreeData->link!=$temPath){
+				$this->response->redirect($node->TreeData->link, true, 301);
+		        //Disable the view to avoid rendering
+		        $this->view->disable();
+			}
+
 		}
 
 		if (!$params['nid'] && ($nten || $nten2 || $nten3)){
-			$ntitleEn = $nten3 ? $nten3 : ($nten2 ? $nten2 : $nten);
+			$temLink = '/'.$nten.'/';
+			if ($nten2){ $temLink .= $nten2.'/'; }
+			if ($nten3){ $temLink .= $nten3.'/'; }
 			$nData = TreeData::findFirst(array(
-								'conditions' => "title_en = :ntitleEn:",
-								'bind' => array('ntitleEn'=>$ntitleEn)
-							));
+							'conditions' => "link = :link:",
+							'bind' => array('link'=>$temLink)
+						));
 			$params['nid'] = $nData->id;
 			$node = TreeStruct::findFirst($params['nid']);
 			$params['node'] = $node;
@@ -459,7 +431,7 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 				break;
 			case 'taglist':
 				$taglist = array();
-				$itemPer = $this->_siteConfig['widgetCfg']['listItemPer'];
+				$itemPer = $this->_siteConfig['widgetCfg']['tagListItemPer'];
 				$start = ($this->_params['p']-1)*$itemPer;
 
 				if ($this->_params['tagPrefix']){
