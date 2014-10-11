@@ -2,7 +2,6 @@
 include_once('../header.php');
 $linkTxt = 'sitemap.txt';
 $baseUrl = 'http://www.licaimap.com';
-die();
 initTagLinks();
 initNodeLinks();
 
