@@ -3,7 +3,7 @@
   	<ul class="list-unstyled">
   	{% for item in taglist['items'] %}
     <li>
-      <a href="/tag/{{ item['id'] }}.html">{{ item['name'] }}</a>
+      <a href="/tag/{{ item['id'] }}.html" title="{{ item['name'] }}">{{ item['name'] }}</a>
     </li>
     {% endfor %}
     </ul>
