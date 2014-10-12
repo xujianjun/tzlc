@@ -41,6 +41,8 @@ tag 上下有问题							done
 搜狗站长平台								done
 nid，tid不存在跳到404						done, response->redirect unwork;解决办法:使用header
 /school/fund/的列表有问题					done
+widget头部加链接或者更多					done
+ie8,ie10,百度浏览器的兼容性					done
 --------------- done end -----------------------
 
 --------------- undone start -----------------------
@@ -53,13 +55,11 @@ tag	pinyin字段
 删除文章中含有
 	新浪微博客户端
 	外链（和讯）
-
 部分文章页有问题
-ie8,ie10,百度浏览器的兼容性
-widget头部加链接或者更多
 文章url和tag的拼音都写到表里，当有改动时即时改动
-sitemap.txt可生成的
+sitemap.txt可生成的，dev和线上同步
 词汇和关键字
+搜索引擎搜录了dev和alpha
 --------------- undone end -----------------------
 
 
