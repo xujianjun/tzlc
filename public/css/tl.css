@@ -5,8 +5,10 @@ ul{list-style:none;}
 .fleft{float:left;}
 .fright{float:right;}
 a{outline:none !important;}
+.glyph{font-family:'Glyphicons Halflings';}
 
 .layout-title a,.panel-title a{color:#fff;}
+.layout-title:before{content:"\e080";font-size: 16px;padding-right: 10px;}
 
 .xt-col-rgt{padding-right:20px;}
 .xt-col-rgt .panel{padding:20px 0 10px 0;}
@@ -489,3 +491,5 @@ height:45px;
 .panel .more a {color:#fff;}
 
 /* navTab style */
+.tl-nav-tab ul.nav-tabs a{cursor: pointer !important;font-weight:bold;}
+

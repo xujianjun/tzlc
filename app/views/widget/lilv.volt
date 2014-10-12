@@ -2,11 +2,11 @@
 
 <div class="tl-nav-tab lilv">
 	<ul class="nav nav-tabs nav-justified">
-	  <li class="active"><a href="#tab1" data-toggle="tab"><b>存款利率</b></a></li>
-	  <li><a href="#tab2" data-toggle="tab"><b>贷款利率</b></a></li>
+	  <li class="active" data-toggle="tl-tab1"><a href="#" style="cursor:default !important;">存款利率</a></li>
+	  <li  data-toggle="tl-tab2"><a href="#" style="cursor:default !important;">贷款利率</a></li>
 	</ul>
 	<div class="tab-content">
-		<div class="tab-pane fade active in" id="tab1">
+		<div class="tab-pane fade active in" id="tl-tab1">
 			<table class="table table-hover">
 		        <thead>
 		          <tr>
@@ -38,7 +38,7 @@
 		        </tbody>
 	      	</table>
 		</div>
-		<div class="tab-pane fade" id="tab2">
+		<div class="tab-pane fade" id="tl-tab2">
 			<table class="table table-hover">
 		        <thead>
 		          <tr>

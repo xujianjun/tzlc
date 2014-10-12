@@ -110,4 +110,12 @@ $(function(){
 			$('.dailyword .dw-desc').text(data.dailyword.word.description);
 		}, 'json');
 	});
+
+	$('.tl-nav-tab ul.nav-tabs li').hover(function(){
+		$(this).siblings().removeClass('active');
+		$(this).addClass('active');
+		var dataToggle = $(this).attr('data-toggle');
+		$(this).closest('.tl-nav-tab').find('.tab-pane').removeClass('active in');
+		$(this).closest('.tl-nav-tab').find('#'+dataToggle).addClass('active in');
+	});
 });

@@ -7,7 +7,7 @@
 <div class="row">
 	<div class="col-xs-12 col-md-8 l-h-left">
 		<div class="row">
-			<div class="layout-title"><a href="/internet/">互联网金融</a></div>
+			<div class="layout-title glyph"><a href="/internet/">互联网金融</a></div>
 			<div class="row">
 	        	<div class="col-md-6">{{ partial("widget/panel", ['items':pageData['panel']['internet_licai']['items']]) }}</div>
 	        	<div class="col-md-6">{{ partial("widget/panel", ['items':pageData['panel']['internet_p2p']['items']]) }}</div>
@@ -18,7 +18,7 @@
 	      	</div>
 		</div>
 		<div class="row">
-			<div class="layout-title"><a href="/school/">财经学堂</a></div>
+			<div class="layout-title glyph"><a href="/school/">财经学堂</a></div>
 			<div class="row">
 	        	<div class="col-md-6">{{ partial("widget/navTab", ['blockName':pageData['navTab']['school_stock_fund']['blockName'], 'items':pageData['navTab']['school_stock_fund']['items']]) }}</div>
 	        	<div class="col-md-6">{{ partial("widget/navTab", ['blockName':pageData['navTab']['school_forex_bank']['blockName'], 'items':pageData['navTab']['school_forex_bank']['items']]) }}</div>
@@ -33,7 +33,7 @@
 	      	</div>
 		</div>
 		<div class="row">
-			<div class="layout-title"><a href="/trade/">投资操盘</a></div>
+			<div class="layout-title glyph"><a href="/trade/">投资操盘</a></div>
 			<div class="row">
 	        	<div class="col-md-6">{{ partial("widget/navTab", ['blockName':pageData['navTab']['trade_basic_tech']['blockName'], 'items':pageData['navTab']['trade_basic_tech']['items']]) }}</div>
 	        	<div class="col-md-6">{{ partial("widget/panel", ['items':pageData['panel']['trade_master']['items']]) }}</div>
