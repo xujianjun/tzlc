@@ -6,16 +6,28 @@ class Db{
 	public static $sql;
 
 	public $_db_config = array(
-							'host' => '114.215.210.34',
-							'port' => '3306',
-							'username' => 'licaimap',
-							'password' => 'licaimap@2014',
-							'dbname' => 'touzilicai'
-						);
+					'licaimapdehoutai' => array(
+								'host' => '114.215.210.34',
+								'port' => '3306',
+								'username' => 'licaimap',
+								'password' => 'licaimap@2014',
+								'dbname' => 'touzilicai'
+					),
+					'admindev' => array(
+								'host' => 'localhost',
+								'port' => '3306',
+								'username' => 'root',
+								'password' => '123456',
+								'dbname' => 'touzilicai'
+					)
+				);
 
 	private function __construct(){
-		$this->conn = mysql_connect($this->_db_config['host'],$this->_db_config['username'],$this->_db_config['password']);
-        if(!mysql_select_db($this->_db_config['dbname'], $this->conn)){
+		$env = preg_replace('/\.licaimap\.com/i', '', $_SERVER['HTTP_HOST']);
+		$env = $env ? $env : 'admindev';
+		$db_config = $this->_db_config[$env];
+		$this->conn = mysql_connect($db_config['host'],$db_config['username'],$db_config['password']);
+        if(!mysql_select_db($db_config['dbname'], $this->conn)){
             echo "数据库连接失败";
         };
         mysql_query('set names utf8',$this->conn);

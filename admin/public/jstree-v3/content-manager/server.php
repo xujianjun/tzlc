@@ -7,9 +7,31 @@ require_once(dirname(__FILE__) . '/class.db.php');
 require_once(dirname(__FILE__) . '/class.tree.php');
 require_once(dirname(__FILE__) . '/class.tag.php');
 
+$db_configs = array(
+					'licaimapdehoutai' => array(
+								'host' => '114.215.210.34',
+								'port' => '3306',
+								'username' => 'licaimap',
+								'password' => 'licaimap@2014',
+								'dbname' => 'touzilicai'
+					),
+					'admindev' => array(
+								'host' => 'localhost',
+								'port' => '3306',
+								'username' => 'root',
+								'password' => '123456',
+								'dbname' => 'touzilicai'
+					)
+				);
+
 if(isset($_GET['operation'])) {
-	$tagObj = new tag(db::get('mysqli://licaimap:licaimap@2014@114.215.210.34/touzilicai'));
-	$fs = new tree(db::get('mysqli://licaimap:licaimap@2014@114.215.210.34/touzilicai'), array('structure_table' => 'tree_struct', 'data_table' => 'tree_data', 'data' => array('title', 'title_en'), 'tagObj'=>$tagObj));
+	$env = preg_replace('/\.licaimap\.com/i', '', $_SERVER['HTTP_HOST']);
+	$env = $env ? $env : 'admindev';
+	$db_config = $db_configs[$env];
+	$dbSchema = 'mysqli://'.$db_config['username'].':'.$db_config['password'].'@'.$db_config['host'].'/'.$db_config['dbname'].'';
+
+	$tagObj = new tag(db::get($dbSchema));
+	$fs = new tree(db::get($dbSchema), array('structure_table' => 'tree_struct', 'data_table' => 'tree_data', 'data' => array('title', 'title_en'), 'tagObj'=>$tagObj));
 	try {
 		$rslt = null;
 		switch($_GET['operation']) {

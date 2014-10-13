@@ -1,9 +1,10 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
+error_reporting(0);
+ini_set('display_errors', 'Off');
 
 define('ROOT_PATH', dirname(__DIR__));
+define('SITE_ROOT_PATH', dirname(dirname(__DIR__)));
 define('SMARTY_DIR', ROOT_PATH . '/libs/Smarty-3.1.18/libs/');
 
 set_include_path(ROOT_PATH . '/libs' . PATH_SEPARATOR . get_include_path());
@@ -27,6 +28,7 @@ include_once 'licaiProduct.class.php';
 include_once 'menu.class.php';
 include_once 'pager.class.php';
 include_once 'path.class.php';
+include_once 'tool.class.php';
 
 $touzilicaiLib = new Touzilicai();
 $siteCfgLib = new SiteCfg();
@@ -37,6 +39,7 @@ $tagLib = new Tag();
 $articleLib = new Article($categoryLib, $articleTagsLib, $tagLib);
 
 $licaiProductLib = new LicaiProduct();
+$toolLib = new Tool();
 
 $menuLib = new Menu();
 $pagerLib = new Pager();
