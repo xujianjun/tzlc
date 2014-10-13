@@ -5,8 +5,6 @@ set_time_limit(0);
 error_reporting(0);
 ini_set('display_errors', 'Off');
 
-$linkTxt = 'addsummary.txt';
-
 $lnk = mysql_connect('114.215.210.34', 'licaimap', 'licaimap@2014')
        or die ('Not connected : ' . mysql_error());
 
