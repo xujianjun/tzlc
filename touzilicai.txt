@@ -65,6 +65,7 @@ seo
 监控
 --------------- undone end -----------------------
 
+apt-get install mysql-client5.5
 ln -s /usr/local/mysql/bin/mysqldumpslow /usr/bin/mysqldumpslow
 
 网站颜色：
