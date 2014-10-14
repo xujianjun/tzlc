@@ -64,7 +64,7 @@ class Tag extends Model{
 	}
 
 	public function delTag($id){
-		$res = $this->_db->update($this->_table, array('status'=>0), array('id'=>$id));
+		$res = $this->_db->delete($this->_table, array('id'=>$id));
 		return $res;
 	}
 
