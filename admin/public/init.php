@@ -1,6 +1,8 @@
 <?php
-//error_reporting(E_ALL);
-//ini_set('display_errors', 'On');
+if (isset($_GET['debug']) && $_GET['debug']=='licaimap'){
+	error_reporting(E_ALL);
+	ini_set('display_errors', 'On');
+}
 
 define('ROOT_PATH', dirname(__DIR__));
 define('SITE_ROOT_PATH', dirname(dirname(__DIR__)));
