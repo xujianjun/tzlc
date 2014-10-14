@@ -12,12 +12,12 @@ class Tags extends Model
 	public static function fetchCidiansCloud($cidianCloudNum){
 		$totalTags = Tags::count(array(
 									'is_cidian'=>1,
-//									'published'=>1
+									'status'=>1
 								));
 		$randStart = mt_rand(0, $totalTags-$cidianCloudNum);
 		$tags = Tags::find(array(
 							'is_cidian'=>1,
-//							'published'=>1,
+							'status'=>1,
 							'limit'=>array(
 								'number'=>$cidianCloudNum,
 								'offset'=>$randStart

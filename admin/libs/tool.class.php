@@ -92,7 +92,7 @@ class Tool extends Model{
 	public function updateSitemap($file){
 		file_put_contents($file, '');
 		$this->initTagSitemaps($file);
-		$this->initTreeSitemaps($file);
+		$this->initTreeSitemaps2($file);
 		return true;
 	}
 
@@ -183,6 +183,13 @@ class Tool extends Model{
 		$sitemap = '';
 		foreach ($rows as $row){
 			$line = $this->_BaseUrl.'/tag/'.$row['id'].'.html';
+			$this->writeToTxt($file, $line);
+		}
+	}
+	public function initTreeSitemaps2($file){
+		$rows = $this->_db->select($this->_TreeDataTable, 'link!=""', '', array(), 'order by id');
+		foreach ($rows as $row){
+			$line = $this->_BaseUrl.$row['link'];
 			$this->writeToTxt($file, $line);
 		}
 	}

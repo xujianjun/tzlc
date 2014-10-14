@@ -23,7 +23,7 @@ while ($row = mysql_fetch_assoc($result)){
 //	echo '<pre>';print_r($details);echo '</pre>';continue;
 
 	$sql = 'update collect set title="'.$details['title'].'",content="'.$details['content'].'" where id='.$id;
-	mysql_query($sql) or die("Invalid query: " . mysql_error());
+	mysql_query($sql) or die("Invalid query: " . mysql_error().', '.$sql);
 	echo $index.'/'.$total.'<br>';
 
 	ob_flush();

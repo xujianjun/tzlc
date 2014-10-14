@@ -1,257 +1,159 @@
 <?php
+
 /**
  * 分页类
- * @author  curran & 271816890@qq.com
- * @date 2014-05-20
  *
- * show(2)  1 ... 62 63 64 65 66 67 68 ... 150
- * 分页样式
- * #page{font:12px/16px arial}
- * #page span{float:left;margin:0px 3px;}
- * #page a{float:left;margin:0 3px;border:1px solid #ddd;padding:3px 7px; text-decoration:none;color:#666}
- * #page a.now_page,#page a:hover{color:#fff;background:#05c}
-*/
-
-class Pager {
-	public     $first_row; 		  //起始行数
-	public     $list_rows;  	  //列表每页显示行数
-
-	protected  $total_pages;	  //总页数
-	protected  $total_rows;		  //总行数
-	protected  $now_page = 1;         //当前页数
-	protected  $method  = 'defalut'; //处理情况 Ajax分页 Html分页(静态化时) 普通get方式
-	protected  $parameter = '';
-	protected  $page_name;        //分页参数的名称
-	protected  $ajax_func_name;
-
-	public 	   $plus = 3;         //分页偏移量
-	protected  $url;
-
-
-	/**
-	 * 构造函数
-	 * @param unknown_type $data
-	 */
-	public function __construct($data = array()) {
-		$this->total_rows 		= !empty($data['total_rows']) ? $data['total_rows'] : 0;;
-		$this->parameter 	    = !empty($data['parameter']) ? $data['parameter'] : '';
-		$this->list_rows 		= !empty($data['list_rows']) && $data['list_rows'] <= 100 ? $data['list_rows'] : 15;
-		$this->total_pages		= ceil($this->total_rows / $this->list_rows);
-		$this->page_name  		= !empty($data['page_name']) ? $data['page_name'] : 'p';
-		$this->ajax_func_name	= !empty($data['ajax_func_name']) ? $data['ajax_func_name'] : '';
-		$this->method           = !empty($data['method']) ? $data['method'] : '';
-
-		/* 当前页面 */
-		if(!empty($data['now_page'])) {
-			$this->now_page = intval($data['now_page']);
-		}
-		$this->now_page   = $this->now_page <= 0 ? 1 : $this->now_page;
-
-		if (!empty($this->total_pages) && $this->now_page > $this->total_pages) {
-			$this->now_page = $this->total_pages;
-		}
-		$this->first_row = $this->list_rows * ($this->now_page - 1);
-	}
-
-	/**
-	 * 得到当前连接
-	 * @param $page
-	 * @param $text
-	 * @return string
-	 */
-	protected function _get_link($page, $text) {
-		switch ($this->method) {
-			case 'ajax':
-				$parameter = '';
-				if($this->parameter) {
-					$parameter = ','.$this->parameter;
-				}
-				return '<a onclick="' . $this->ajax_func_name . '(\'' . $page . '\''.$parameter.')" href="javascript:void(0)">' . $text . '</a>' . "\n";
-				break;
-			case 'html':
-				$url = str_replace('?', $page, $this->parameter);
-				return '<a href="' .$url . '">' . $text . '</a>' . "\n";
-				break;
-			default:
-				return '<a href="' . $this->_get_url($page) . '">' . $text . '</a>' . "\n";
-				break;
-		}
-	}
-
+ * @author JiangJian <silverd@sohu.com>
+ * @copyright 2011-2012 xiangle.com
+ * $Id: Page.php 1152 2012-02-22 04:50:49Z lujun $
+ * @version    2011-06-02  ::  JiangJian  ::  Create File
+ */
+class Pager
+{
     /**
-     * 设置当前页面链接
+     * 底部分页条
+     *
+     * @param int       $total        总记录数
+     * @param int       $pageSize     每页几条
+     * @param int       $curPage      当前页码
+     * @param string    $mpurl        基本URL
+     * @param array     $params       附加参数
+     * @param int       $adjacents    相邻页码按钮数
+     * @param string    $auchor       跳转后定位锚点
+     * @return string
      */
-    protected function _set_url() {
-        $url  =  $_SERVER['REQUEST_URI'] . (strpos($_SERVER['REQUEST_URI'], '?') ? '' : "?") . $this->parameter;
-        $parse = parse_url($url);
-        if (isset($parse['query'])) {
-            parse_str($parse['query'], $params);
-            unset($params[$this->page_name]);
-            $url   =  $parse['path'] . '?' . http_build_query($params);
+    public function get($total, $pageSize, $curPage, $mpurl, $params = array(), $adjacents = 2, $auchor = '')
+    {
+    	/*<div class="pagination">
+<a class="first" href="#">&lt;&lt;</a>
+<a class="prev" href="#">&lt;</a>
+<a href="#" class="current">1</a>
+<a href="#">2</a><a href="#">3</a>
+<a href="#">4</a>...<a href="#">8</a>
+<a href="#">9</a><a href="#">10</a>
+<a class="next" href="#">&gt;</a>
+<a class="end" href="#">&gt;&gt;</a>
+</div>*/
+        $multipage = '';
+        $mpurl     = self::setMpUrl($mpurl, $params);
+        $realpages = 1;
+
+        if ($total > $pageSize) {
+            $realpages = @ceil($total / $pageSize);
+            $maxpage   = 10000;
+            $pages     = $maxpage && $maxpage < $realpages ? $maxpage : $realpages;
+
+            $multipage .= '<a class="first" title="第一页" href="' . $mpurl . '&page=' . 1 . $auchor . '">&lt;&lt;</a>';
+
+            // 上一页
+            if ($curPage > 1) {
+                $multipage .= '<a title="上一页" class="prev" href="' . $mpurl . '&page=' . ($curPage - 1) . $auchor . '">&lt;</a>';
+            }
+
+            // 第一页
+            if ($curPage > ($adjacents + 1)) {
+                $multipage .= '<a href="' . $mpurl . $auchor . '" >1</a>';
+            }
+
+            // 间隔
+            if ($curPage > ($adjacents + 2)) {
+                $multipage .= '<span class="simple">...</span>';
+            }
+
+            $from = ($curPage > $adjacents) ? ($curPage - $adjacents) : 1;
+            $to   = ($curPage < ($pages - $adjacents)) ? ($curPage + $adjacents) : $pages;
+
+            for ($i = $from; $i <= $to; $i++) {
+                if ($i == $curPage) {
+                    $multipage .= '<a href="#" class="current">' . $i . '</a>';
+                } elseif ($i == 1) {
+                    $multipage .= '<a href="' . $mpurl . $auchor . '" title="' . $i . '">' . $i . '</a>';
+                } else {
+                    $multipage .= '<a href="' . $mpurl . '&page=' . $i . $auchor . '" title="' . $i . '">' . $i . '</a>';
+                }
+            }
+
+            // 间隔
+            if ($curPage < ($pages - $adjacents - 1)) {
+                $multipage .= '...';
+            }
+
+            // 最后一页
+            if ($curPage < ($pages - $adjacents)) {
+                $multipage .= '<a href="' . $mpurl . '&page=' . $pages . $auchor . '" title="' . $pages . '">' . $pages . '</a>';
+            }
+
+            // 下一页
+            if ($curPage < $pages) {
+                $multipage .= '<a href="' . $mpurl . '&page=' . ($curPage + 1) . $auchor . '" title="下一页" class="next">&gt;</a>';
+            }
+
+            $multipage .= '<a class="end" href="' . $mpurl . '&page=' . $pages . $auchor . '">&gt;&gt;</a>';
+
+            $multipage = $multipage ? $multipage : '';
+        } else {
+        	$multipage = '<a class="first" href="javascript:;">&lt;&lt;</a><a href="javascript:;">1</a><a class="end" href="javascript:;">&gt;&gt;</a>';
         }
-        if (!empty($params)) {
-        	$url .= '&';
+        return $multipage;
+    }
+
+    public static function page2($mpurl, $params1, $params2, $type)
+    {
+        $mpurl1     = self::setMpUrl($mpurl, $params1);
+        $mpurl2     = self::setMpUrl($mpurl, $params2);
+        if (1 == $type) {
+            return '<a>结果只有一页</a>';
         }
-        $this->url = $url;
-    }
 
-    /**
-     * 得到$page的url
-     * @param $page 页面
-     * @return string
-     */
-    protected function _get_url($page) {
-    	if($this->url === NULL) {
-    		$this->_set_url();
-    	}
-    	return $this->url . $this->page_name . '=' . $page;
-    }
-
-
-    /**
-     * 得到第一页
-     * @return string
-     */
-    public function first_page($name = '第一页') {
- 		if ($this->now_page > 5) {
- 			return $this->_get_link('1', $name);
- 		}
- 		return '';
-    }
-
-    /**
-     * 最后一页
-     * @param $name
-     * @return string
-     */
-    public function last_page($name = '最后一页') {
- 		if ($this->now_page < $this->total_pages - 5) {
- 			return $this->_get_link($this->total_pages, $name);
- 		}
- 		return '';
-    }
-
-    /**
-     * 上一页
-     * @return string
-     */
-    public function up_page($name = '上一页') {
-    	if ($this->now_page > 1) {
-    		return $this->_get_link($this->now_page - 1, $name);
-    	}
-    	return '';
-    }
-
-    /**
-     * 下一页
-     * @return string
-     */
-    public function down_page($name = '下一页') {
-    	if($this->now_page < $this->total_pages) {
-    		return $this->_get_link($this->now_page + 1, $name);
-    	}
-    	return '';
-    }
-
-    /**
-     * 分页样式输出
-     * @param $param
-     * @return string
-     */
-    public function show($param = 1) {
-    	if ($this->total_rows < 1) {
-    		return '';
-    	}
-
-    	$className = 'show_' . $param;
-    	$classNames = get_class_methods($this);
-    	if(in_array($className, $classNames)) {
-    		return $this->$className();
-    	}
-  		return '';
-    }
-
-	protected function show_1() {
-		$plus = $this->plus;
-    	if ($plus + $this->now_page > $this->total_pages) {
-    		$begin = $this->total_pages - $plus * 2;
-    	} else {
-    		$begin = $this->now_page - $plus;
-    	}
-
-    	$begin = ($begin >= 1) ? $begin : 1;
-    	$return = '';
-    	$return .= $this->first_page();
-    	$return .= $this->up_page();
-    	for ($i = $begin; $i <= $begin + $plus * 2;$i++) {
-    		if ($i > $this->total_pages) {
-    			break;
-    		}
-    		if ($i == $this->now_page) {
-    			$return .= "<a class='now_page'>$i</a>\n";
-    		} else {
-    			$return .= $this->_get_link($i, $i) . "\n";
-    		}
-    	}
-    	$return .= $this->down_page();
-    	$return .= $this->last_page();
-    	return $return;
-    }
-
-    protected function show_2() {
-        if($this->total_pages > 1) {
-    		$return = '';
-    		$return .= $this->up_page('<');
-			for ($i=1; $i<=$this->total_pages; $i++) {
-				if ($i == $this->now_page) {
-					$return .= "<a class='now_page'>$i</a>\n";
-				} else {
-					if($this->now_page-$i>=4 && $i != 1) {
-						$return .="<span class='pageMore'>...</span>\n";
-						$i = $this->now_page-3;
-					} else {
-						if($i >= $this->now_page+5 && $i != $this->total_pages) {
-							$return .="<span>...</span>\n";
-							$i = $this->total_pages;
-						}
-						$return .= $this->_get_link($i, $i) . "\n";
-					}
-				}
-			}
-			$return .= $this->down_page('>');
-    		return $return;
-    	}
-    }
-
-    protected function show_3() {
-    	$plus = $this->plus;
-    	if ($plus + $this->now_page > $this->total_pages) {
-    		$begin = $this->total_pages - $plus * 2;
-    	} else {
-    		$begin = $this->now_page - $plus;
-    	}
-    	$begin = ($begin >= 1) ? $begin : 1;
-    	$return = '总计 ' .$this->total_rows. ' 个记录分为 ' .$this->total_pages. ' 页, 当前第 ' . $this->now_page . ' 页 ';
-    	$return .= ',每页 ';
-    	$return .= '<input type="text" value="'.$this->list_rows.'" id="pageSize" size="3"> ';
-    	$return .= $this->first_page()."\n";
-    	$return .= $this->up_page()."\n";
-    	$return .= $this->down_page()."\n";
-    	$return .= $this->last_page()."\n";
-    	$return .= '<select onchange="'.$this->ajax_func_name.'(this.value)" id="gotoPage">';
-
-        for ($i = $begin; $i<=$begin+10; $i++) {
-            if($i > $this->total_pages) {
-    			break;
-    		}
-    		if($i == $this->now_page) {
-    			$return .= '<option selected="true" value="'.$i.'">'.$i.'</option>';
-    		} else {
-    			$return .= '<option value="' .$i. '">' .$i. '</option>';
-    		}
+        if (2 == $type ) {
+            return '<a href="' . $mpurl1 . '&pageT=n" >下一页</a>';
         }
-    	$return .= '</select>';
-    	return $return;
+
+        if (3 == $type ) {
+            return '<a  href="' . $mpurl2 . '&pageT=u">上一页</a>';
+        }
+
+        $multipage = '<a  href="' . $mpurl2 . '&pageT=u">上一页</a><a href="' . $mpurl1 . '&pageT=n" >下一页</a>';
+
+        return $multipage;
     }
+
+
+
+    /**
+     * 根据条件组合生成 URL
+     *
+     * @param string $mpurl 基本URL
+     * @param array $params 附加参数
+     * @return string
+     */
+    public static function setMpUrl($mpurl, $params = array())
+    {
+        if (strpos($mpurl, '?') === false && substr($mpurl, -1, 1) != '/') {
+            $mpurl .= '/';
+        }
+        $mpurl .= (strpos($mpurl, '?') === false ? '?' : '&') ;
+
+        $mpurl .= self::httpBuildQuery($params);
+
+        return $mpurl;
+    }
+
+    public Static function httpBuildQuery($params)
+    {
+    	$paramUrl = '';
+    	if ($params) {
+        	foreach ($params as $key => $val) {
+        		if (is_array($val)) {
+        			foreach ($val as $val1) {
+        				$paramUrl .= '&' . $key .'[]=' .  $val1;
+        			}
+        		} else {
+        			$paramUrl .= '&' . $key . '=' . $val;
+        		}
+        	}
+        }
+        return $paramUrl;
+    }
+
 }
-

@@ -1,12 +1,10 @@
 <?php
-
-error_reporting(0);
-ini_set('display_errors', 'Off');
+//error_reporting(E_ALL);
+//ini_set('display_errors', 'On');
 
 define('ROOT_PATH', dirname(__DIR__));
 define('SITE_ROOT_PATH', dirname(dirname(__DIR__)));
 define('SMARTY_DIR', ROOT_PATH . '/libs/Smarty-3.1.18/libs/');
-
 set_include_path(ROOT_PATH . '/libs' . PATH_SEPARATOR . get_include_path());
 
 require_once(SMARTY_DIR . 'Smarty.class.php');
@@ -44,10 +42,9 @@ $toolLib = new Tool();
 $menuLib = new Menu();
 $pagerLib = new Pager();
 $pathLib = new Path();
-
 $siteCfgs = $siteCfgLib->getSiteCfgs();
 $smarty->assign('siteCfgs', $siteCfgs);
-
+?>
 
 
 

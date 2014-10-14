@@ -4,9 +4,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>后台管理系统-主内容</title>
 	<link href="/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
-	<link href="/css/common.css" rel="stylesheet" type="text/css" />
-	<link href="/css/main.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="../css/jquery/themes/base/jquery.ui.all.css">
+	<link href="/css/tl-admin.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="/css/jquery/themes/base/jquery.ui.all.css">
 	<script type="text/javascript" src="/js/jquery/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript" src="/js/jquery/jquery.ui.core.js"></script>
 	<script type="text/javascript" src="/js/jquery/jquery.ui.widget.js"></script>
@@ -22,9 +21,7 @@
 	<script type="text/javascript" src="/umeditor/umeditor.config.js"></script>
     <script type="text/javascript" src="/umeditor/umeditor.min.js"></script>
     <script type="text/javascript" src="/umeditor/lang/zh-cn/zh-cn.js"></script>
-    <script type="text/javascript" src="/js/jquery/jquery.cookie.js"></script>
-	<script type="text/javascript" src="/js/common.js"></script>
-	<script type="text/javascript" src="/js/main.js"></script>
+	<script type="text/javascript" src="/js/tl-admin.js"></script>
 	<link rel="stylesheet" href="/css/jquery/demos.css">
 </head>
 
@@ -33,73 +30,194 @@
 		<form>
 			<fieldset>
 				<input type="hidden" name="id" class="id text ui-widget-content ui-corner-all" />
+				<label for="pinyinPrefix">拼音</label>
+				<input type="text" name="pinyinPrefix" class="pinyinPrefix text ui-widget-content ui-corner-all" />
 				<label for="name">名称</label>
 				<input type="text" name="name" class="name text ui-widget-content ui-corner-all" />
 				<label for="desc">描述</label>
-				<script type="text/plain" id="content_editor" class="content" style="width:500px;height:200px;"></script><br />
+				<textarea rows="8" name="desc" class="desc ui-widget-content ui-corner-all"></textarea>
+				<label for="is_cidian">是否词汇</label>
+				<select name="cidian" class="is_cidian text ui-widget-content ui-corner-all">
+				  <option value ="1">是</option>
+				  <option value ="0">否</option>
+				</select>
+				<label for="status">是否发布</label>
+				<select name="status" class="status text ui-widget-content ui-corner-all">
+				  <option value ="1">是</option>
+				  <option value ="0">否</option>
+				</select>
+
 			</fieldset>
 		</form>
 	</div>
-	<div class="mainDiv">
-		<div class="breadCrumb">
-			<input type="button" class="backBtn" value="返回" />
-			<input type="button" class="forwardBtn" value="前进" />
-			<input type="button" class="refreshBtn" value="刷新" />&nbsp;&nbsp;&nbsp;&nbsp;
-			站点管理 -> <a href="/script/tag.php">标签管理</a>
+	<div class="top">
+		<div class="filter">
+			ID: <input type="text" class="tlat_startid" size="25" value="{$params['tlat_startid']}"/> -
+					<input type="text" class="tlat_endid" size="25" value="{$params['tlat_endid']}"/><br/>
+			标题: <input type="text" class="tlat_name" size="50" value="{$params['tlat_name']}"/><br/>
+			描述: <input type="text" class="tlat_desc" size="50" value="{$params['tlat_desc']}"/><br/>
+			是否词汇：<select class="tlat_is_cidian">
+					<option value ="10"{if $params['tlat_is_cidian']==10}selected{/if}>选择</option>
+				  <option value ="1"{if $params['tlat_is_cidian']==1}selected{/if}>是</option>
+				  <option value ="0"{if $params['tlat_is_cidian']==0}selected{/if}>否</option>
+				</select><br/>
+			是否发布：<select class="tlat_status">
+				  <option value ="10"{if $params['tlat_status']==10}selected{/if}>选择</option>
+				  <option value ="1"{if $params['tlat_status']==1}selected{/if}>是</option>
+				  <option value ="0"{if $params['tlat_status']==0}selected{/if}>否</option>
+				</select><br/>
+			<input type="button" class="btn" value="检索" />
+			<input type="button" class="btn-reset" value="重置" />
 		</div>
-		<div class="main main-tag">
-			<div class="items">
-				<div class="itemListTop">
-					<div class="opt_btn">
-						<input type="button" class="addItem" value="添加" onclick="edit_tag()"/>
-					</div>
-					<details>
-						<summary>过滤器</summary>
-						<div class="tag_filter">
-				    		ID：<input type="text" name="from_id" class="from_id" value="0" />&nbsp;-&nbsp;
-				    			<input type="text" name="to_id" class="to_id" value="0" /><br>
-				    		标题：<input type="text" name="title" class="title" value="" /><br>
-							排序：<select class="order">
-								  <option value ="id" selected>ID</option>
-								  <option value ="id desc">ID DESC</option>
-								</select><br />
-				    		<input type="button" name="filterBtn" class="filterBtn" value="提交" />
-						</div>
-					</details>
-					<div class="filterKeys">当前搜索条件：{$filterKeys}&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="tag_filter_reset" value="重置" /></div>
-				</div>
-				<div class="pager">{$pager}</div>
-				<div class="itemList">
-					<table style="width:100%;">
-						<tr class="tr-top">
-							<td colspan="4" align="center">标签</td>
-						</tr>
-						<tr class="tr-top">
-							<td style="width:10%;">ID</td>
-							<td style="width:20%;">名称</td>
-							<td style="width:40%;">描述</td>
-							<td style="width:20%;">操作</td>
-						</tr>
-						{foreach $tags as $key=>$tag}
-						<tr class="id_{$tag['id']}">
-							<td style="width:10%;" class="id">{$tag['id']}</td>
-							<td style="width:20%;" class="name">{$tag['name']}</td>
-							<td style="width:40%;" class="desc">{$tag['description']}</td>
-							<td style="width:20%;">
-								<input type="button" class="edit_button" onclick="edit_tag({$tag['id']},this)" value="编辑" />
-								<input type="button" class="del_button" onclick="del_tag({$tag['id']},this)" value="删除" />
-							</td>
-						</tr>
-						{/foreach}
-					</table>
-				</div>
-				<div class="pager">{$pager}</div>
-			</div>
+		<div class="result-title">
+			排序：{$orderStr}
+			每页数量：
+			<select class="items-per-page" onchange="changeIPP();">
+				<option value ="5">5</option>
+				<option value ="10">10</option>
+			  	<option value ="20">20</option>
+			  	<option value ="30">30</option>
+			  	<option value ="50">50</option>
+			  	<option value ="100">100</option>
+			  	<option value ="200">200</option>
+			  	<option value ="500">500</option>
+			  	<option value ="1000">1000</option>
+			  	<option value ="0">不分页</option>
+			</select>
+			<span class="pager">{$pager}</span>
 		</div>
 	</div>
-	<script type="text/javascript">
-	//实例化编辑器
-	var um = UM.getEditor('content_editor');
+	<div class="table_header">
+		<table>
+			<tr class="table_top">
+				<td style="width:5%;">序号</td>
+				<td style="width:10%;" class="order"><span class="text" data-oname="id">ID</span><a title="排序" class="order-btn"><img src="/imgs/order.jpg" class="{if $params['order']['key']=='id'}{$params['order']['type']}{/if}"/></a></td>
+				<td style="width:10%;" class="order"><span class="text" data-oname="pinyinPrefix">拼音</span><a title="排序" class="order-btn"><img src="/imgs/order.jpg" class="{if $params['order']['key']=='pinyinPrefix'}{$params['order']['type']}{/if}"/></a></td>
+				<td style="width:10%;"><span class="text">标题</span></td>
+				<td style="width:10%;"><span class="text">描述</span></td>
+				<td style="width:10%;"><span class="text">是否词汇</span></td>
+				<td style="width:10%;"><span class="text">是否发布</span></td>
+				<td style="width:10%;">
+					<input type="button" class="edit_button" onclick="edit_tag(0,this)" value="添加" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="table_list" style="padding-bottom:30px;">
+		<table>
+			<tbody>
+			{foreach $tags as $key=>$tag}
+			<tr class="id_{$tag['id']}">
+				<td style="width:5%;" class="key">{$tag@iteration}</td>
+				<td style="width:10%;" class="id">{$tag['id']}</td>
+				<td style="width:10%;" class="pinyinPrefix">{$tag['pinyinPrefix']}</td>
+				<td style="width:10%;" class="name">{$tag['name']}</td>
+				<td style="width:10%;" class="desc">{$tag['description']}</td>
+				<td style="width:10%;" class="is_cidian">{if $tag['is_cidian']}是{else}否{/if}</td>
+				<td style="width:10%;" class="status">{if $tag['status']}是{else}否{/if}</td>
+				<td style="width:10%;">
+					<input type="button" class="edit_button" onclick="edit_tag({$tag['id']},this)" value="编辑" />
+					<input type="button" class="del_button" onclick="del_tag({$tag['id']},this)" value="删除" />
+				</td>
+			</tr>
+			{/foreach}
+			</tbody>
+		</table>
+		<span class="pager" style="line-height:25px;float:right;">
+		每页数量：
+			<select class="items-per-page" onchange="changeIPP();">
+				<option value ="5">5</option>
+				<option value ="10">10</option>
+			  	<option value ="20">20</option>
+			  	<option value ="30">30</option>
+			  	<option value ="50">50</option>
+			  	<option value ="100">100</option>
+			  	<option value ="200">200</option>
+			  	<option value ="500">500</option>
+			  	<option value ="1000">1000</option>
+			  	<option value ="0">不分页</option>
+			</select>
+			{$pager}
+		</span>
+	</div>
+	<script>
+	$(function(){
+		var params_json = {$params_json};
+		//根据cookie给分页下拉框设置当前值
+		var tlIPP = getCookie('tlIPP');
+		tlIPP = tlIPP ? tlIPP : 20;
+		console.log(params_json);
+		$(".items-per-page option[value='"+tlIPP+"']").attr("selected","selected");
+
+		$('.filter .btn').live('click', function(){
+			var tlat_startid = $('.filter .tlat_startid').val();
+			var tlat_endid = $('.filter .tlat_endid').val();
+			var tlat_name = $('.filter .tlat_name').val();
+			var tlat_desc = $('.filter .tlat_desc').val();
+			var tlat_is_cidian = $('.filter .tlat_is_cidian').val();
+			var tlat_status = $('.filter .tlat_status').val();
+
+			addCookie('tlat_startid', tlat_startid);
+			addCookie('tlat_endid', tlat_endid);
+			addCookie('tlat_name', tlat_name);
+			addCookie('tlat_desc', tlat_desc);
+			addCookie('tlat_is_cidian', tlat_is_cidian);
+			addCookie('tlat_status', tlat_status);
+
+			location.reload();
+			return false;
+		});
+		$('.filter .btn-reset').live('click', function(){
+			deleteCookie('tlat_name');
+			deleteCookie('tlat_desc');
+			deleteCookie('tlat_startid');
+			deleteCookie('tlat_endid');
+			deleteCookie('tlat_is_cidian');
+			deleteCookie('tlat_status');
+			location.reload();
+			return false;
+		});
+
+		$('.order-btn').on('click', function(){
+			var tlat_order_key = $(this).prev().attr('data-oname');
+			var tlat_order_type = 'order_desc';
+			if (params_json.order.key && params_json.order.key == tlat_order_key){
+				tlat_order_type = params_json.order.type=='order_asc' ? 'order_desc' : 'order_asc';
+				addCookie('tlat_order_type', tlat_order_type);
+			} else {
+				addCookie('tlat_order_key', tlat_order_key);
+				addCookie('tlat_order_type', tlat_order_type);
+			}
+			$(this).find('img').attr('class', tlat_order_type);
+
+			location.reload();
+			return false;
+		});
+
+		$('.cancel-order-btn').on('click', function(){
+			deleteCookie('tlat_order_key');
+			deleteCookie('tlat_order_type');
+			location.reload();
+			return false;
+		});
+		$('.table_top .order').hover(
+			function(){
+				if (!$(this).find('img').attr('class')){
+					$(this).find('img').attr('class', 'order_desc');
+				}
+			},
+			function(){
+				var orderKey = $(this).find('span').attr('data-oname');
+				if (params_json.order.key!=orderKey){
+					$(this).find('img').removeClass();
+				}
+			}
+		);
+
+
+	});
+
+
 	</script>
 </body>
 </html>

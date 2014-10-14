@@ -1,5 +1,4 @@
 <?php
-
 include_once '../init.php';
 
 if (isset($_POST['act'])){
@@ -9,9 +8,19 @@ if (isset($_POST['act'])){
 	$res = false;
 	switch ($act){
 		case 'edit_tag':
+			$pinyinPrefix = isset($_POST['pinyinPrefix']) ? $_POST['pinyinPrefix'] : '';
 			$name = isset($_POST['name']) ? $_POST['name'] : '';
 			$desc = isset($_POST['desc']) ? $_POST['desc'] : '';
-			$params = array('id'=>$id, 'name'=>$name, 'description'=>$desc);
+			$is_cidian = isset($_POST['is_cidian']) ? $_POST['is_cidian'] : '';
+			$status = isset($_POST['status']) ? $_POST['status'] : '';
+			$params = array(
+						'id' => $id,
+						'pinyinPrefix' => $pinyinPrefix,
+						'name' => $name,
+						'description' => $desc,
+						'is_cidian' => $is_cidian,
+						'status' => $status,
+					);
 			$res = $tagLib->updateTag($params);
 			break;
 		case 'del_tag':
@@ -25,48 +34,61 @@ if (isset($_POST['act'])){
 	}
 	$touzilicaiLib->resData($result);
 }
-
-$page = isset($_GET['p']) ? $_GET['p'] : 1;
-$item_per_page = $config['item_per_page'];
-$start = ($page-1)*$item_per_page;
-$limit = ' limit '.$start.','.$item_per_page;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$pagesize = isset($_COOKIE['tlIPP']) ? $_COOKIE['tlIPP'] : 20;
 
 //get filter search
-$from_id = isset($_COOKIE['tfFromId']) ? $_COOKIE['tfFromId'] : 0;
-$to_id = isset($_COOKIE['tfToId']) ? $_COOKIE['tfToId'] : 0;
-$title = isset($_COOKIE['tfTitle']) ? $_COOKIE['tfTitle'] : '';
-$order = isset($_COOKIE['tfOrder']) ? $_COOKIE['tfOrder'] : 'id';
+$tlat_startid = isset($_COOKIE['tlat_startid']) ? $_COOKIE['tlat_startid'] : 0;
+$tlat_endid = isset($_COOKIE['tlat_endid']) ? $_COOKIE['tlat_endid'] : 0;
+$tlat_name = isset($_COOKIE['tlat_name']) ? $_COOKIE['tlat_name'] : '';
+$tlat_desc = isset($_COOKIE['tlat_desc']) ? $_COOKIE['tlat_desc'] : '';
+$tlat_is_cidian = isset($_COOKIE['tlat_is_cidian']) ? (int)$_COOKIE['tlat_is_cidian'] : 10;
+$tlat_status = isset($_COOKIE['tlat_status']) ? (int)$_COOKIE['tlat_status'] : 1;
 
-$conditions = array();
-$filter = false;
-if ($from_id || $to_id || $title){
-	$filter = true;
-	$conditions = array(
-				'from_id' => $from_id,
-				'to_id' => $to_id,
-				'title' => $title,
-				'order' => $order
-			);
-}
-$totalTags = $tagLib->countTags($conditions, $filter);
-$tags = $tagLib->getTags($conditions, '', $filter, $limit);
-$smarty->assign('tags', $tags);
+$tlat_order_key = isset($_COOKIE['tlat_order_key']) ? $_COOKIE['tlat_order_key'] : '';
+$tlat_order_type = isset($_COOKIE['tlat_order_type']) ? $_COOKIE['tlat_order_type'] : '';
 
-$filterKeys = '';
-$filterKeys .= $from_id ? ' from_id: '.$from_id.',' : '';
-$filterKeys .= $to_id ? ' to_id: '.$to_id.',' : '';
-$filterKeys .= $title ? ' 标题: '.$title.',' : '';
-$filterKeys .= $order!='id' ? ' 排序: '.$order : '';
-$smarty->assign('filterKeys', $filterKeys);
-
-//pager
+$order = array('key'=>$tlat_order_key, 'type' => $tlat_order_type);
 $params = array(
-			'total_rows'=>$totalTags, #(必须)
-			'now_page'  =>$page,  #(必须)
-			'list_rows' =>$item_per_page, #(可选) 默认为15
+	'tlat_startid' => $tlat_startid,
+	'tlat_endid' => $tlat_endid,
+	'tlat_name' => $tlat_name,
+	'tlat_desc' => $tlat_desc,
+	'tlat_is_cidian' => $tlat_is_cidian,
+	'tlat_status' => $tlat_status,
+
+	'page' => $page,
+	'pagesize' => $pagesize,
+	'order' => $order
 );
-$pagerLib = new Pager($params);
-$pager = $pagerLib->show(3);
+$params_json = json_encode($params);
+
+$result = $tagLib->filterTags($params);
+$tags = $result['list'];
+
+//分页
+$total = $result['total'];
+$pager = '记录总数: '.$total;
+if ($pagesize){
+	$pageTotal = ceil($total/$pagesize);
+	$pager .= ', 总页数: '.$pageTotal.', 当前第 '.$page.' 页'.$pagerLib->get($total, $pagesize, $page, '/script/tag.php'.$type, array(), 10);
+}
+
+if ($params['order']['key']){
+	$orderStr = isset($pagePaths[$params['order']['key']]) ? $pagePaths[$params['order']['key']] : $params['order']['key'];
+	if ($params['order']['type'] && in_array($params['order']['type'], array('order_asc', 'order_desc'))){
+		$orderStr .= ' , ';
+		$orderStr .= $params['order']['type']=='order_asc' ? '升序' : '降序';
+	}
+
+	$orderStr .= '&nbsp;&nbsp;&nbsp;&nbsp;<button class="cancel-order-btn">取消排序</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+} else {
+	$orderStr = '无&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+}
+$smarty->assign('orderStr', $orderStr);
+$smarty->assign('params_json', $params_json);
+$smarty->assign('params', $params);
 $smarty->assign('pager', $pager);
+$smarty->assign('tags', $tags);
 
 $smarty->display('script/tag.html');

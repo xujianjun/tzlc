@@ -1,0 +1,89 @@
+
+body {
+	font-size: 62.5%;
+	font-family: "Trebuchet MS", "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+
+html, body { margin:0; padding:0; /*background:#D9E3CB;*/ }
+body, td, th, pre, code, select, option, input, textarea {
+	font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+}
+
+.top{
+	padding:10px 10px 10px 20px;
+}
+.top input,.top select{margin-right:20px;}
+.top .type{margin-right:20px;}
+.top .menu{font-size:14px;padding: 5px 0 10px 10px;background:rgb(231, 231, 231);}
+.top .menu a{text-decoration:none;}
+.top .generalForm{padding:5px 0 0 0 ;}
+.generalForm input{color:gray;}
+
+.result-title{
+	margin-top:10px;
+	padding:5px;
+	font-weight:bold;
+	border-top:1px solid #a0a9a8;
+}
+.result-title input{
+	float:right;
+}
+
+.table_list table, .table_header table{
+	line-height:22px;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	table-layout: fixed;
+}
+td, th{
+	text-align:center;
+	border: 1px solid #a0a9a8;
+	word-break:break-word;
+}
+tr.table_top{
+	background:#cacaca;
+}
+tr.even{
+	background:#f0f0f0;
+}
+tr:hover{
+	background:#D9E3CB;
+}
+td.action a{padding-right:10px;}
+.url_input{white-space:nowrap;}
+.url_input input{
+	width:80%;
+}
+tr.lastAdd{border-bottom:2px solid red;}
+
+.pager{padding:0 20px;}
+.pager a{padding:0 10px;}
+.footer{padding:10px 0;}
+a.current{color:red;}
+
+
+.filter{line-height:25px;}
+.filter input{margin-right:0;}
+.filter label{margin-right:20px;padding-top:10px;}
+
+.table_top img{display:none;width:20px;height:12px;cursor:pointer;}
+.table_top .order-btn{paddign-left:5px;}
+.table_top img.order_asc{
+	display:inline-table;
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg); 	/* IE 9 */
+	-moz-transform:rotate(180deg); 	/* Firefox */
+	-webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+	-o-transform:rotate(180deg); 	/* Opera */
+}
+.table_top img.order_desc{display:inline-table;}
+
+#tag-dialog-form label, #tag-dialog-form input { display:block; }
+#tag-dialog-form input.text,
+#tag-dialog-form textarea,
+#tag-dialog-form select { margin-bottom:12px; width:95%; padding: .4em; }
+#tag-dialog-form select{width:80px;}
+#tag-dialog-form fieldset { padding:0; border:0; margin-top:10px; }
+

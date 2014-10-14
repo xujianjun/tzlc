@@ -5,19 +5,19 @@ $act = isset($_GET['act']) ? trim($_GET['act']) : '';
 
 $result = array();
 switch ($act){
-	case 'updateSitemap':
+	case 'updateSitemap':	//更新/sitemap.txt
 		$res = $toolLib->updateSitemap(SITE_ROOT_PATH.'/public/sitemap.txt');
 		break;
-	case 'updateTagPinyin':
+	case 'updateTagPinyin':	//更新tags表的pinyin字段
 		$res = $toolLib->updateTagPinyin();
 		break;
-	case 'updateTreeLink':
+	case 'updateTreeLink':	//更新tree_data的link字段
 		$res = $toolLib->updateTreeLink();
 		break;
-	case 'updateTreeLR':
+	case 'updateTreeLR':	//修正tree_struct的lft,rgt字段
 		$res = $toolLib->updateTreeLR();
 		break;
-	case 'updateTreePos':
+	case 'updateTreePos':	//修正tree_struct的pos字段
 		$res = $toolLib->updateTreePos();
 		break;
 	default:
