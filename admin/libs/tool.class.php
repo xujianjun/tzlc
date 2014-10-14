@@ -179,7 +179,7 @@ class Tool extends Model{
 	}
 
 	public function initTagSitemaps($file){
-		$rows = $this->_db->select($this->_TagsTable, '', '', array(), 'order by id');
+		$rows = $this->_db->select($this->_TagsTable, array('status'=>1), '', array(), 'order by id');
 		$sitemap = '';
 		foreach ($rows as $row){
 			$line = $this->_BaseUrl.'/tag/'.$row['id'].'.html';
