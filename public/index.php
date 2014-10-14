@@ -17,7 +17,6 @@ define('APP_PATH', realpath('..'));
 $env = preg_replace('/\.licaimap\.com/i', '', $_SERVER['HTTP_HOST']);
 $env = $env ? $env : 'dev';
 $config = include APP_PATH . "/app/config/config.".$env.".php";
-
 if (isset($_GET['debug']) && $_GET['debug']=='licaimap'){
 	$config->application->debug=true;
 }

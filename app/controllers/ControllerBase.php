@@ -121,7 +121,7 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 		if ($params['tid']){
 //			$tag = Tags::findFirst($params['tid']);
 			$tag = Tags::findFirst(array(
-						'conditions' => 'id>?1 and status=?2',
+						'conditions' => 'id=?1 and status=?2',
 						'bind' => array(1=>$params['tid'], 2=>1),
 						'order' => 'id asc',
 					));
