@@ -57,12 +57,15 @@ tag	pinyin字段
 	外链（和讯）
 部分文章页有问题
 文章url和tag的拼音都写到表里，当有改动时即时改动
-sitemap.txt可生成的，dev和线上同步
-词汇和关键字
+sitemap.txt可生成的，dev和线上分开	done
+词汇和关键字	doing
 搜索引擎搜录了dev和alpha
+效率
+seo
+监控
 --------------- undone end -----------------------
 
-
+ln -s /usr/local/mysql/bin/mysqldumpslow /usr/bin/mysqldumpslow
 
 网站颜色：
 #ff0066 深红，头部背景
