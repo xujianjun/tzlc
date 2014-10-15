@@ -787,7 +787,8 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 				$sitemap['menus'] = $this->_menus;
 				$allTags = array();
 				$temTags = Tags::find(array(
-											'conditions' => "",
+											'conditions' => "status=?1",
+											'bind' => array(1=>1),
 											'order' => 'pinyinPrefix',
 										))->toArray();
 				$temTags = Tags::addTagsAttr($temTags);
