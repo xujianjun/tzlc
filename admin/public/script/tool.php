@@ -25,19 +25,20 @@ switch ($act){
 
 		//type:simple(修正没有tid的nid);node(单个node);all(全部重新修正)
 		$type = isset($_GET['type']) ? trim($_GET['type']) : 'simple';
-		$res = $toolLib->updateNodeTag($type, $nid);
+		$pass = isset($_GET['pass']) ? trim($_GET['pass']) : '';
+		$res = $toolLib->updateNodeTag($type, $nid, $pass);
 		break;
 	default:
 		$result = array('resCode'=>2, 'resMsg'=>'参数错误');
 		break;
 }
-
-if (!$result && $res){
-	if ($res){
-		$result = array('resCode'=>0, 'resMsg'=>'成功！');
-	} else {
-		$result = array('resCode'=>1, 'resMsg'=>'失败！');
-	}
+if ($result){
+	echo json_encode($result);die();
 }
 
+if ($res){
+	$result = array('resCode'=>0, 'resMsg'=>'成功！');
+} else {
+	$result = array('resCode'=>1, 'resMsg'=>'失败！');
+}
 echo json_encode($result);

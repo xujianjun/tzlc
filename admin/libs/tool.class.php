@@ -13,7 +13,7 @@ class Tool extends Model{
 		parent::__construct();
 	}
 
-	public function updateNodeTag($type, $nid=0){
+	public function updateNodeTag($type, $nid=0, $pass=''){
 		$res = false;
 		$tags = $this->_db->select($this->_TagsTable, array('status'=>1), 'id', array(), 'order by id');
 		if (!count($tags)){
@@ -27,6 +27,9 @@ class Tool extends Model{
 		$selSql = '';
 		switch ($type){
 			case 'delete':
+				if ($pass != 'licaimaproot123'){
+					return $res;
+				}
 				$delSql = 'delete from '.$this->_NodeTagsTable;
 				$delSql .= $nid ? ' where nid='.$nid : ' where 1=1';
 				$this->_db->query($delSql);
