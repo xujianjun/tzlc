@@ -35,36 +35,24 @@ class TreeStruct extends Model
 		$defaultOptions = array('link'=>true, 'menu'=>false, 'menuLevel'=>0);
 		$options = array_merge($defaultOptions, $options);
 		foreach ($nodes as $key=>$node){
-			$nid = $node['id'];
-			$relationTreeNodes = self::findRelationTrees($node);
-			$nodeParents = $relationTreeNodes['parent'];
-			$path = '';
-			$menus = array();
-			foreach ($nodeParents as $parentNode){
-				$menus[] = $parentNode->TreeData->title;
-				$ptitle_en = $parentNode->TreeData->title_en;
-				if (!$ptitle_en){
-					continue;
-				}
-				$path .= '/'.$ptitle_en;
-			}
-			if ($options['link']){
-				$appfix = '';
-				if ($node['type'] == 'article'){
-					$appfix = '/'.$node['id'].'.html';
-				} else {
-					$appfix = $node['TreeData']['title_en'] ? '/'.$node['TreeData']['title_en'].'/' : '/';
-				}
-				$link = $path.$appfix;
-				$nodes[$key]['link'] = $link;
+			if ($options['link'] && $node['TreeData']['link']){
+				$nodes[$key]['link'] = $node['TreeData']['link'];
 			}
 			if ($menus && $node['type'] == 'article' && $options['menu'] && $options['menuLevel']>0){
-				$menuStr = '';
-				if (count($menus) > $options['menuLevel']){
-					$menus = array_slice($menus, -$options['menuLevel']);
+				$relationTreeNodes = self::findRelationTrees($node);
+				$nodeParents = $relationTreeNodes['parent'];
+				$menus = array();
+				foreach ($nodeParents as $parentNode){
+					$menus[] = $parentNode->TreeData->title;
 				}
-				$menuStr = implode(' - ', $menus);
-				$nodes[$key]['TreeData']['title'] = '['.$menuStr.'] '.$nodes[$key]['TreeData']['title'];
+				if ($menus){
+					$menuStr = '';
+					if (count($menus) > $options['menuLevel']){
+						$menus = array_slice($menus, -$options['menuLevel']);
+					}
+					$menuStr = implode(' - ', $menus);
+					$nodes[$key]['TreeData']['title'] = '['.$menuStr.'] '.$nodes[$key]['TreeData']['title'];
+				}
 			}
 
 		}

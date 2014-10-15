@@ -41,14 +41,16 @@
    'pinyinPrefix' => 5,
    'enName' => 2,
    'description' => 6,
-   'is_cidian' => 8,
+   'is_cidian' => 0,
    'source' => 2,
    'sourceName' => 2,
-   'status' => 8,
+   'status' => 0,
  ),
  5 => 
  array (
    'id' => true,
+   'is_cidian' => true,
+   'status' => true,
  ),
  8 => 'id',
  9 => 
@@ -58,10 +60,10 @@
    'pinyinPrefix' => 2,
    'enName' => 2,
    'description' => 2,
-   'is_cidian' => 5,
+   'is_cidian' => 1,
    'source' => 2,
    'sourceName' => 2,
-   'status' => 5,
+   'status' => 1,
  ),
  10 => 
  array (

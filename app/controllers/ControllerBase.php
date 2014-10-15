@@ -119,7 +119,6 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 			$params['nodeSiblings'] = $relationTreeNodes['sibling'];
 		}
 		if ($params['tid']){
-//			$tag = Tags::findFirst($params['tid']);
 			$tag = Tags::findFirst(array(
 						'conditions' => 'id=?1 and status=?2',
 						'bind' => array(1=>$params['tid'], 2=>1),
@@ -386,8 +385,8 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 				$dailywordTids = $this->_siteConfig['dailywordTids'];
 				shuffle($dailywordTids);
 				$dailyword['word'] = Tags::findFirst(array(
-										"conditions" => "is_cidian = ?1 and id = ?2",
-										"bind"       => array(1 => 1, 2 => $dailywordTids[0])
+										"conditions" => "is_cidian = ?1 and id = ?2 and status=?3",
+										"bind"       => array(1 => 1, 2 => $dailywordTids[0], 3=>1)
 									))->toArray();
 				$widgetData = $dailyword;
 				break;
@@ -440,9 +439,9 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 				$start = ($this->_params['p']-1)*$itemPer;
 
 				if ($this->_params['tagPrefix']){
-					$conditions = 'pinyinPrefix="'.$this->_params['tagPrefix'].'" and is_cidian=1';
+					$conditions = 'pinyinPrefix="'.$this->_params['tagPrefix'].'" and status=1';
 				} else {
-					$conditions = 'is_cidian=1';
+					$conditions = 'status=1';
 				}
 				$taglist['items'] = Tags::find(array(
 								'conditions' => $conditions,
@@ -717,14 +716,14 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 								break;
 							}
 							$prevTag = Tags::findFirst(array(
-													'conditions' => "pinyinPrefix=:pinyin: and id<?1",
-													'bind' => array('pinyin'=>$pinyinPrefix, 1=>$tag->id),
+													'conditions' => "pinyinPrefix=:pinyin: and id<?1 and status=?2",
+													'bind' => array('pinyin'=>$pinyinPrefix, 1=>$tag->id, 2=>1),
 													'order' => 'id desc',
 												));
 							$prevTag = $prevTag ? $prevTag->toArray() : array();
 							$nextTag = Tags::findFirst(array(
-													'conditions' => "pinyinPrefix=:pinyin: and id>?1",
-													'bind' => array('pinyin'=>$pinyinPrefix, 1=>$tag->id),
+													'conditions' => "pinyinPrefix=:pinyin: and id>?1 and status=?2",
+													'bind' => array('pinyin'=>$pinyinPrefix, 1=>$tag->id, 2=>1),
 													'order' => 'id asc',
 												));
 							$nextTag = $nextTag ? $nextTag->toArray() : array();

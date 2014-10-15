@@ -10,7 +10,7 @@
   <div class="carousel-inner" role="listbox">
   	<?php foreach ($items as $key => $value) { ?>
     <div class="item <?php if ($key == 0) { ?>active<?php } ?>">
-      <a href="<?php echo $value['link']; ?>"><img src="<?php echo $value['img_path']; ?>" alt="<?php echo $value['alt']; ?>"></a>
+      <a href="<?php echo $value['link']; ?>" title="<?php echo $value['title']; ?>"><img src="<?php echo $value['img_path']; ?>" alt="<?php echo $value['alt']; ?>" title="<?php echo $value['title']; ?>"></a>
       <div class="carousel-caption"><?php echo $value['title']; ?></div>
     </div>
     <?php } ?>

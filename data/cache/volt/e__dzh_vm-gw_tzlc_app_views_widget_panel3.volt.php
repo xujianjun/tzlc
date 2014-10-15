@@ -7,16 +7,16 @@
 	</div>
 	<div class="clear"></div>
 	<div class="w-header">
-		<a class="fleft" href="<?php echo $siteConfig['cfshHeadNode']['lcgs']['link']; ?>"><img src="<?php echo $siteConfig['cfshHeadNode']['lcgs']['img_path']; ?>" width="80" height="80" alt="<?php echo $siteConfig['cfshHeadNode']['lcgs']['alt']; ?>"></a>
+		<a class="fleft" href="<?php echo $siteConfig['cfshHeadNode']['lcgs']['link']; ?>" title="<?php echo $siteConfig['cfshHeadNode']['lcgs']['title']; ?>"><img src="<?php echo $siteConfig['cfshHeadNode']['lcgs']['img_path']; ?>" width="80" height="80" alt="<?php echo $siteConfig['cfshHeadNode']['lcgs']['alt']; ?>" title="<?php echo $siteConfig['cfshHeadNode']['lcgs']['title']; ?>" /></a>
 		<div class="fright">
-			<h3><a href="<?php echo $siteConfig['cfshHeadNode']['lcgs']['link']; ?>"><?php echo $siteConfig['cfshHeadNode']['lcgs']['title']; ?></a></h3>
+			<h3><a href="<?php echo $siteConfig['cfshHeadNode']['lcgs']['link']; ?>" title="<?php echo $siteConfig['cfshHeadNode']['lcgs']['title']; ?>"><?php echo $siteConfig['cfshHeadNode']['lcgs']['title']; ?></a></h3>
 			<p><?php echo $siteConfig['cfshHeadNode']['lcgs']['desc']; ?></p>
 		</div>
 	</div>
 	<div class="clear"></div>
 	<ul class="w-list">
 		<?php foreach ($items[0]['data'] as $value) { ?>
-        <li><a href="<?php echo $value['link']; ?>"><?php echo $value['TreeData']['title']; ?></a></li>
+        <li><a href="<?php echo $value['link']; ?>" title="<?php echo $value['TreeData']['title']; ?>"><?php echo $value['TreeData']['title']; ?></a></li>
         <?php } ?>
 	</ul>
 </div>

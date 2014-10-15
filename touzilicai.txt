@@ -58,7 +58,7 @@ tag	pinyin字段
 部分文章页有问题
 文章url和tag的拼音都写到表里，当有改动时即时改动
 sitemap.txt可生成的，dev和线上分开	done
-词汇和关键字	doing
+词汇和关键字	done,后台数据待数据
 搜索引擎搜录了dev和alpha
 效率
 seo

@@ -1,8 +1,8 @@
 
 <div class="tl-nav-tab hangqing">
 	<ul class="nav nav-tabs nav-justified">
-	  <li class="active"><a href="#tab-stock" data-toggle="tab">全球指数</a></li>
-	  <li><a href="#tab-forex" data-toggle="tab">外汇</a></li>
+	  <li class="active" data-toggle="tab-stock"><a href="#" style="cursor:default !important;">全球指数</a></li>
+	  <li data-toggle="tab-forex"><a href="#" style="cursor:default !important;">外汇</a></li>
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane fade active in" id="tab-stock">

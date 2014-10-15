@@ -8,9 +8,9 @@
 	<div class="clear"></div>
 	<?php foreach ($items[0]['data'] as $key => $value) { ?>
 	<div class="w-header">
-		<a class="fleft" href="<?php echo $value['link']; ?>"><img src="/img/cfsh/tzal-<?php echo $key + 1; ?>.jpg" width="80" height="80" alt="<?php echo $value['TreeData']['title']; ?>"></a>
+		<a class="fleft" href="<?php echo $value['link']; ?>" title="<?php echo $value['TreeData']['title']; ?>"><img src="/img/cfsh/tzal-<?php echo $key + 1; ?>.jpg" width="80" height="80" alt="<?php echo $value['TreeData']['title']; ?>" title="<?php echo $value['TreeData']['title']; ?>"></a>
 		<div class="fright">
-			<h3><a href="<?php echo $value['link']; ?>"><?php echo $value['TreeData']['title']; ?></a></h3>
+			<h3><a href="<?php echo $value['link']; ?>" title="<?php echo $value['TreeData']['title']; ?>"><?php echo $value['TreeData']['title']; ?></a></h3>
 			<div class="desc"><?php echo $value['TreeData']['summary']; ?></div>
 		</div>
 	</div>
