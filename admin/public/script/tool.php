@@ -20,6 +20,13 @@ switch ($act){
 	case 'updateTreePos':	//修正tree_struct的pos字段
 		$res = $toolLib->updateTreePos();
 		break;
+	case 'updateNodeTag':	//修正nodetag的数据
+		$nid = isset($_GET['nid']) ? (int)$_GET['nid'] : 0;
+
+		//type:simple(修正没有tid的nid);node(单个node);all(全部重新修正)
+		$type = isset($_GET['type']) ? trim($_GET['type']) : 'simple';
+		$res = $toolLib->updateNodeTag($type, $nid);
+		break;
 	default:
 		$result = array('resCode'=>2, 'resMsg'=>'参数错误');
 		break;

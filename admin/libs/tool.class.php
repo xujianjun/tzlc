@@ -5,6 +5,7 @@ class Tool extends Model{
 	public $_TreeStructTable = 'tree_struct';
 	public $_TreeDataTable = 'tree_data';
 	public $_TagsTable = 'tags';
+	public $_NodeTagsTable = 'node_tags';
 
 	public $_RootTreeId = 0;
 	public $_BaseUrl = 'http://www.licaimap.com';
@@ -12,6 +13,110 @@ class Tool extends Model{
 		parent::__construct();
 	}
 
+	public function updateNodeTag($type, $nid=0){
+		$res = false;
+		$tags = $this->_db->select($this->_TagsTable, array('status'=>1), 'id', array(), 'order by id');
+		if (!count($tags)){
+			return $res;
+		}
+
+		$aLft = 2;
+		$aRgt = 5703;
+		$whereSql = ' where ts.lft>'.$aLft.' and ts.rgt<'.$aRgt.' ';
+
+		$selSql = '';
+		switch ($type){
+			case 'delete':
+				$delSql = 'delete from '.$this->_NodeTagsTable;
+				$delSql .= $nid ? ' where nid='.$nid : ' where 1=1';
+				$this->_db->query($delSql);
+				return true;
+				break;
+			case 'node':
+				$selSql = 'select ts.*,td.title,td.content from tree_struct ts ' .
+						'left join tree_data td on ts.id=td.id ' .
+						$whereSql.' and (ts.type="default" or ts.id='.$nid.') order by ts.lft';
+				break;
+			case 'simple':
+				$selSql = 'select ts.*,td.title,td.content from tree_struct ts ' .
+						'left join node_tags nt on ts.id=nt.nid ' .
+						'left join tree_data td on ts.id=td.id ' .
+						$whereSql.' and (ts.type="default" or nt.nid is null) order by ts.lft';
+				break;
+			case 'all':
+				$selSql = 'select ts.*,td.title,td.content from tree_struct ts ' .
+						'left join tree_data td on ts.id=td.id ' .
+						$whereSql.' order by ts.lft';
+				break;
+			default:
+				break;
+		}
+//		$selSql .= ' limit 10';
+//		echo $selSql.'<br>';
+		if (!$selSql){ return $res; }
+		$nodes = $this->_db->query($selSql);
+		$total = count($nodes);
+//		echo '<pre>';print_r($nodes);echo '</pre>';
+		$index = 0;
+		$parentParams = array();
+		$parentType = 'default';
+		foreach ($nodes as $node){
+			$index++;
+			//计算父名称数组
+			if ($node['type']=='default'){
+				if ($parentType != 'default'){
+					array_pop($parentParams);
+					for ($i = count($parentParams)-1;$i>=0;$i--){
+						if ($parentParams[$i]['lft']>$node['lft'] || $parentParams[$i]['rgt']<$node['rgt']){
+							array_pop($parentParams);
+						}
+					}
+				}
+				$parentParams[] = array('title'=>$node['title'], 'lft'=>$node['lft'], 'rgt'=>$node['rgt']);
+				$parentType = $node['type'];
+				continue;
+			} else {
+				$parentType = $node['type'];
+			}
+			$parentTitles = array();
+			foreach ($parentParams as $parentParam){
+				$parentTitles[] = $parentParam['title'];
+			}
+//			echo '<pre>';print_r($parentTitles);echo '</pre>';
+			//计算父名称数组 end
+
+			$ntitle = $node['title'];
+			$ncontent = $node['content'];
+
+			$nodeTids = array();
+			$cutNum = 5;
+			foreach  ($tags as $tag){
+				$tagname = $tag['name'];
+				if (count($parentTitles) && in_array($tagname, $parentTitles)){
+					$nodeTids[$tag['id']] = 10000;
+					$cutNum++;
+					continue;
+				}
+
+				$MatchNum = preg_match_all('/'.$tagname.'/i', $ntitle, $matches1) + preg_match_all('/'.$tagname.'/i', $ncontent, $matches2);
+				if ($MatchNum > 0){
+					$nodeTids[$tag['id']] = $MatchNum;
+				}
+			}
+			arsort($nodeTids);
+			$nodeTids = array_slice($nodeTids, 0, $cutNum, true);
+			foreach ($nodeTids as $nodeTid=>$num){
+				$insql = 'insert into node_tags values('.$node['id'].','.$nodeTid.')';
+				$this->_db->query($insql);
+				$line = 'nid:'.$node['id'].', ntitle:'.$ntitle.', tid:'.$nodeTid.', tname:'.$tags[$nodeTid]['name'].', num:'.$num;
+				echo $line.'<br>';
+				ob_flush();
+				flush();
+			}
+		}
+
+		return true;
+	}
 	public function updateTreePos(){
 		$treeDirs = $this->_db->select($this->_TreeStructTable, array('type' => 'default'), '', array(), 'order by id');
 		if ($treeDirs){
