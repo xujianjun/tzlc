@@ -97,6 +97,7 @@ class tree
 			if(isset($options['with_path'])) {
 				$nodes[$key]['path'] = $this->get_path($node[$this->options['structure']['id']]);
 			}
+
 			if(isset($options['with_tag']) && $node['type']=='article') {
 				$nodeTags = $this->options['tagObj']->get_tags($node[$this->options['structure']['id']]);
 				$selectedJoins = '';
@@ -104,12 +105,11 @@ class tree
 					$selectedJoins .= $selectedJoins ? ', '.$nodeTag['name'] : $nodeTag['name'];
 				}
 				$nodes[$key]['tags']['selectedJoins'] = $selectedJoins;
+				/*
 				$nodes[$key]['tags']['selected'] = $nodeTags;
-				$nodes[$key]['tags']['unselected'] = $this->options['tagObj']->get_unselected_tags($nodeTags);
-
+				$nodes[$key]['tags']['unselected'] = $this->options['tagObj']->get_unselected_tags($nodeTags);*/
 			}
 		}
-
 		return $nodes;
 	}
 
@@ -134,7 +134,7 @@ class tree
 			//set tag
 			$tids = isset($params['tids']) ? $params['tids'] : '';
 			if ($tids){
-				$this->options['tagObj']->updateNodeTags($id, $tids);
+				//$this->options['tagObj']->updateNodeTags($id, $tids);
 			}
 
 			$content = htmlspecialchars($content);

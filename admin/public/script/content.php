@@ -70,6 +70,7 @@
 					<input type="text" name="id" id="id" readonly="readonly" class="text ui-widget-content ui-corner-all" />
 					<label for="title">标题</label>
 					<input type="text" name="title" id="title" readonly="readonly" class="text ui-widget-content ui-corner-all" />
+					<!--
 					<label for="tags">标签</label><button type="button" class="tagOpt-btn">显示标签栏</button>
 					<div class="tagSelects">
 						<div class="leftSelect">
@@ -87,7 +88,7 @@
 							</select>
 						</div>
 						<div class="clear"></div>
-					</div><br />
+					</div><br />-->
 					<label for="summary">摘要</label>
 					<textarea name="summary" id="summary" rows="5" cols="90"></textarea><br />
 					<label for="content">内容</label>
@@ -244,7 +245,7 @@
 											'</div>'
 											);
 								$('#dialog-form #id').val(datas[0].id);
-
+								/*
 								var tagLeft = '', tagRight = '';
 								for(var i=0;i<datas[0].tags.selected.length;i++){
 									tagLeft += '<option value="'+datas[0].tags.selected[i].id+'">'+datas[0].tags.selected[i].name+'</option>';
@@ -254,7 +255,7 @@
 								}
 								$('#dialog-form #tagLeft').html(tagLeft);
 								$('#dialog-form #tagRight').html(tagRight);
-
+								*/
 								$('#dialog-form #summary').val(datas[0].summary);
 								$('#dialog-form #title').val(datas[0].title);
 								um.setContent(datas[0].content);
