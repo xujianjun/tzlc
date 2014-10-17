@@ -94,6 +94,8 @@ return new \Phalcon\Config(array(
         'navTab_otherSchool_spot_futures' => array(array('nid' => 22,'title' => '现货学堂', 'link' => '/school/spot/'),array('nid' => 23,'title' => '期货学堂', 'link' => '/school/futures/')),
         'panel_otherSchool_gold' => array(array('nid' => 25,'title' => '黄金学堂', 'link' => '/school/gold/')),
     ),
+    'blockNoCache' => array('dailyword'),
+
     'pageTitle' => array(
 		'IndexController-index' => array('股票.贵金属.理财知识'),
 		'PageController-xtHome' => array('财经学堂'),
@@ -134,4 +136,5 @@ return new \Phalcon\Config(array(
     ),
     'hotNids' => array(7184,7133,7148,1870,6407,7172),
     'dailywordTids' => array(9,37,55,60,71,89,90),
+
 ));

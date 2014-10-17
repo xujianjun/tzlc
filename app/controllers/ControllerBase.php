@@ -304,6 +304,7 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 		$metaData['keywords'] = $metaData['keywords'] ? $metaData['keywords'].'，'.$defaultMetaData['keywords'] : $defaultMetaData['keywords'];
 		$metaData['description'] = $description ? $description : $metaData['description'];
 		$metaData['description'] = $metaData['description'] ? $metaData['description'] : $defaultMetaData['description'];
+
 		$this->view->setVar("metaData", $metaData);
 	}
 
@@ -329,6 +330,7 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 
 	public function _initBreadcrumb(){
 		$breadcrumb = '';
+
 		if ($this->_params['nid']){
 			$path = '';
 			foreach ($this->_params['nodeParents'] as $parentNode){
@@ -348,6 +350,7 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 		if ($breadcrumb){
 			$breadcrumb = '<li><a href="/">首页</a></li>' . $breadcrumb;
 		}
+
 		return $breadcrumb;
 	}
 
@@ -372,6 +375,16 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 		$blockCfgKey = $block ? $view.'_'.$block : $view;
 		$blockCfg = $this->_siteConfig['blockCfg'][$blockCfgKey];
 		$blockNum = $this->_siteConfig['widgetCfg']['blockNum'];
+
+		$blockNoCache = $this->_siteConfig['blockNoCache'];
+		if (!in_array($blockCfgKey, $blockNoCache)){
+			$cacheKey = 'fetchWidget:'.$blockCfgKey.'-n'.$this->_params['nid'].'-t'.$this->_params['tid'].'-p'.$this->_params['p'];
+			$widgetData = $this->modelsCache->get($cacheKey);
+			if ($widgetData){
+				return $widgetData;
+			}
+		}
+
 		switch ($view){
 			case 'slider': //理财故事
 			case 'btslider':
@@ -809,6 +822,10 @@ class ControllerBase extends Phalcon\Mvc\Controller {
 				break;
 			default:
 				break;
+		}
+
+		if (!in_array($blockCfgKey, $blockNoCache)){
+			$this->modelsCache->save($cacheKey, $widgetData);
 		}
 		return $widgetData;
 	}

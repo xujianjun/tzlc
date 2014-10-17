@@ -115,7 +115,7 @@ $di->set('dispatcher', function () {
 /**
  * View cache
  */
-$di->set( 'viewCache', function () use ($config) {
+$di->set('viewsCache', function () use ($config) {
     if ($config->application->debug) {
         $frontCache = new \Phalcon\Cache\Frontend\None();
         return new Phalcon\Cache\Backend\Memory($frontCache);
@@ -126,7 +126,7 @@ $di->set( 'viewCache', function () use ($config) {
         ));
         return new FileCache($frontCache, array(
             "cacheDir" => APP_PATH . "/data/cache/viewCache/",
-            "prefix"   => "touzilicai-cache-"
+            "prefix"   => "tl-viewCache-"
         ));
     }
 });
@@ -143,9 +143,9 @@ $di->set('modelsCache', function () use ($config) {
         $frontCache = new \Phalcon\Cache\Frontend\Data(array(
             "lifetime" => 86400 * 30
         ));
-        return new \Phalcon\Cache\Backend\File($frontCache, array(
+        return new FileCache($frontCache, array(
             "cacheDir" => APP_PATH . "/data/cache/modelsCache/",
-            "prefix"   => "touzilicai-cache-data-"
+            "prefix"   => "tl-modelCache-"
         ));
     }
 });
