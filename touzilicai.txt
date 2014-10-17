@@ -87,6 +87,10 @@ ln -s /usr/local/mysql/bin/mysqldumpslow /usr/bin/mysqldumpslow
 logo	210*68
 
 --------------------------------------
+数据来源：
+	http://www.xhjylm.com/news/xhrm/index_2.html
+	http://finance.qq.com/money/moneyschool/02.htm
+	http://www.chinaacc.com/web/lc_bx_2/
 
 推广：
 	站长平台： 百度、 搜狗、 360搜索。提交url、sitemap
